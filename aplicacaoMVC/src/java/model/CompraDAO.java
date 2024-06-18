@@ -3,6 +3,9 @@ package model;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import entidade.Categoria;
+import entidade.Cliente;
 import entidade.Compra;
 import entidade.Fornecedor;
 import entidade.Funcionario;
@@ -28,8 +31,8 @@ public class CompraDAO{
     public void Inserir(Compra compra) throws Exception {
         Conexao conexao = new Conexao();
         try {
-            PreparedStatement sql = conexao.getConexao().prepareStatement("INSERT INTO compra (quantidade_compra, data_compra, valor_compra, id_fornecedor, id_produto, id_comprador)"
-                    + " VALUES (?,?,?,?,?,?,?,?,?)");
+            PreparedStatement sql = conexao.getConexao().prepareStatement("INSERT INTO compras (quantidade_compra, data_compra, valor_compra, id_fornecedor, id_produto, id_comprador)"
+                    + " VALUES (?,?,?,?,?,?)");
             sql.setInt(1, compra.getQuantidade());
             sql.setDate(2, compra.getData());
             sql.setInt(3, compra.getValor());
@@ -65,6 +68,7 @@ public class CompraDAO{
                     compra.setQuantidade(resultado.getInt("QUANTIDADE"));
                     compra.setData(resultado.getDate("DATA_COMPRA"));
                     compra.setValor(resultado.getInt("VALOR_COMPRA"));
+
                     Fornecedor fornecedor = new Fornecedor();
                     fornecedor.setId(resultado.getInt("ID_FORNECEDOR"));
                     fornecedor.setRazaoSocial(resultado.getString("RAZAO_SOCIAL"));
@@ -76,11 +80,25 @@ public class CompraDAO{
                     fornecedor.setCep(resultado.getString("CEP")); 
                     fornecedor.setTelefone(resultado.getString("TELEFONE"));
                     fornecedor.setEmail(resultado.getString("EMAIL_FORNECEDOR"));
+                    
                     compra.setFornecedor(fornecedor);
+
                     Produto produto = new Produto();
                     produto.setId(resultado.getInt("ID_PRODUTO"));
-                    // Faz depois o resto família
+                    produto.setNomeProduto(resultado.getString("NOME_PRODUTO"));
+                    produto.setDescricao(resultado.getString("DESCRICAO"));
+                    produto.setPrecoCompra(resultado.getFloat("PRECO_COMPRA"));
+                    produto.setPrecoVenda(resultado.getFloat("PRECO_VENDA"));
+                    produto.setQuantidadeDisponivel(resultado.getInt("QUANTIDADE_DISPONIVEL"));
+                    produto.setLiberadoVenda(resultado.getString("LIBERADO_VENDA"));
+
+                    Categoria categoria = new Categoria();
+                    categoria.setId(resultado.getInt("ID_CATEGORIA"));
+                    categoria.setNomeCategoria(resultado.getString("NOME_CATEGORIA"));
+                    
+                    produto.setCategoria(categoria);
                     compra.setProduto(produto);
+
                     Funcionario comprador = new Funcionario();
                     comprador.setId(resultado.getInt("ID_FUNCIONARIO"));
                     comprador.setNome(resultado.getString("NOME"));
@@ -89,6 +107,7 @@ public class CompraDAO{
                     comprador.setPapel(Papel.values()[intPapel]);
                     comprador.setSenha(resultado.getString("SENHA"));
                     comprador.setEmail(resultado.getString("EMAIL_FUNCIONARIO"));
+                    
                     compra.setComprador(comprador);
                 }
                 
@@ -96,75 +115,108 @@ public class CompraDAO{
             return compra;
 
         } catch (SQLException e) {
-            throw new RuntimeException("Query de select (get) incorreta");
+            throw new RuntimeException("Query de select (Compra) incorreta");
         } finally {
             conexao.closeConexao();
         }
     }
 
-    public void Alterar(Cliente cliente) throws Exception {
+    public void Alterar(Compra compra) throws Exception {
         Conexao conexao = new Conexao();
         try {
-            PreparedStatement sql = conexao.getConexao().prepareStatement("UPDATE clientes SET nome = ?, cpf = ?, endereco = ?, bairro = ?, cidade = ?, uf = ?, cep = ?, telefone = ?, email = ?  WHERE ID = ? ");
-            sql.setString(1, cliente.getNome());
-            sql.setString(2, cliente.getCpf());
-            sql.setString(3, cliente.getEndereco());
-            sql.setString(4, cliente.getBairro());
-            sql.setString(5, cliente.getCidade());
-            sql.setString(6, cliente.getUf());
-            sql.setString(7, cliente.getCep());
-            sql.setString(8, cliente.getTelefone());
-            sql.setString(9, cliente.getEmail());
+            PreparedStatement sql = conexao.getConexao().prepareStatement("UPDATE compras SET quantidade_compra = ?, data_compra = ?, valor_compra = ?, id_fornecedor = ?, id_produto = ?, id_comprador WHERE ID = ? ");
+            sql.setInt(1, compra.getQuantidade());
+            sql.setDate(2, compra.getData());
+            sql.setInt(3, compra.getValor());
+            sql.setInt(4, compra.getFornecedor().getId());
+            sql.setInt(5, compra.getProduto().getId());
+            sql.setInt(6, compra.getComprador().getId());
+            //sql.setInt(7, compra.getId());?
             sql.executeUpdate();
 
         } catch (SQLException e) {
-            throw new RuntimeException("Query de update (alterar) incorreta");
+            throw new RuntimeException("Query de update (Compras) incorreta");
         } finally {
             conexao.closeConexao();
         }
     }
 
-    public void Excluir(Cliente cliente) throws Exception {
+    public void Excluir(Compra compra) throws Exception {
         Conexao conexao = new Conexao();
         try {
-            PreparedStatement sql = conexao.getConexao().prepareStatement("DELETE FROM clientes WHERE ID = ? ");
-            sql.setInt(1, cliente.getId());
+            PreparedStatement sql = conexao.getConexao().prepareStatement("DELETE FROM compras WHERE ID = ? ");
+            sql.setInt(1, compra.getId());
             sql.executeUpdate();
 
         } catch (SQLException e) {
-            throw new RuntimeException("Query de delete (excluir) incorreta");
+            throw new RuntimeException("Query de delete (Compras) incorreta");
         } finally {
             conexao.closeConexao();
         }
     }
-     public ArrayList<Cliente> ListaDeClientes() {
-        ArrayList<Cliente> meusClientes = new ArrayList();
+     public ArrayList<Compra> ListaDeCompras() {
+        ArrayList<Compra> minhasCompras = new ArrayList();
         Conexao conexao = new Conexao();
         try {
-            String selectSQL = "SELECT * FROM funcionarios order by nome";
+            String selectSQL = "SELECT * FROM compras order by nome";
             PreparedStatement preparedStatement;
             preparedStatement = conexao.getConexao().prepareStatement(selectSQL);
             ResultSet resultado = preparedStatement.executeQuery();
             if (resultado != null) {
                 while (resultado.next()) {
-                    Cliente cliente = new Cliente();
-                    cliente.setNome(resultado.getString("NOME"));
-                    cliente.setCpf(resultado.getString("CPF"));
-                    cliente.setEndereco(resultado.getString("ENDERECO"));
-                    cliente.setBairro ( resultado.getString("BAIRRO"));
-                    cliente.setCidade( resultado.getString("CIDADE"));
-                    cliente.setUf(resultado.getString("UF"));
-                    cliente.setCep(resultado.getString("CEP")); 
-                    cliente.setTelefone(resultado.getString("TELEFONE"));
-                    cliente.setEmail(resultado.getString("EMAIL"));
-                    meusClientes.add(cliente);
+                    Compra compra = new Compra();
+                    compra.setQuantidade(resultado.getInt("QUANTIDADE"));
+                    compra.setData(resultado.getDate("DATA_COMPRA"));
+                    compra.setValor(resultado.getInt("VALOR_COMPRA"));
+
+                    Fornecedor fornecedor = new Fornecedor();
+                    fornecedor.setId(resultado.getInt("ID_FORNECEDOR"));
+                    fornecedor.setRazaoSocial(resultado.getString("RAZAO_SOCIAL"));
+                    fornecedor.setCnpj(resultado.getString("CPNJ"));
+                    fornecedor.setEndereco(resultado.getString("ENDERECO"));
+                    fornecedor.setBairro ( resultado.getString("BAIRRO"));
+                    fornecedor.setCidade( resultado.getString("CIDADE"));
+                    fornecedor.setUf(resultado.getString("UF"));
+                    fornecedor.setCep(resultado.getString("CEP")); 
+                    fornecedor.setTelefone(resultado.getString("TELEFONE"));
+                    fornecedor.setEmail(resultado.getString("EMAIL_FORNECEDOR"));
+                    
+                    compra.setFornecedor(fornecedor);
+
+                    Produto produto = new Produto();
+                    produto.setId(resultado.getInt("ID_PRODUTO"));
+                    produto.setNomeProduto(resultado.getString("NOME_PRODUTO"));
+                    produto.setDescricao(resultado.getString("DESCRICAO"));
+                    produto.setPrecoCompra(resultado.getFloat("PRECO_COMPRA"));
+                    produto.setPrecoVenda(resultado.getFloat("PRECO_VENDA"));
+                    produto.setQuantidadeDisponivel(resultado.getInt("QUANTIDADE_DISPONIVEL"));
+                    produto.setLiberadoVenda(resultado.getString("LIBERADO_VENDA"));
+
+                    Categoria categoria = new Categoria();
+                    categoria.setId(resultado.getInt("ID_CATEGORIA"));
+                    categoria.setNomeCategoria(resultado.getString("NOME_CATEGORIA"));
+                    
+                    produto.setCategoria(categoria);
+                    compra.setProduto(produto);
+
+                    Funcionario comprador = new Funcionario();
+                    comprador.setId(resultado.getInt("ID_FUNCIONARIO"));
+                    comprador.setNome(resultado.getString("NOME"));
+                    comprador.setCpf(resultado.getString("CPF"));
+                    int intPapel = Integer.parseInt(resultado.getString("Papel"));
+                    comprador.setPapel(Papel.values()[intPapel]);
+                    comprador.setSenha(resultado.getString("SENHA"));
+                    comprador.setEmail(resultado.getString("EMAIL_FUNCIONARIO"));
+                    
+                    compra.setComprador(comprador);
+                    minhasCompras.add(compra);
                 }
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Query de select (ListaDeFuncionarios) incorreta");
+            throw new RuntimeException("Query de select <ListaDeFuncionarios> (Compras) incorreta");
         } finally {
             conexao.closeConexao();
         }
-        return meusClientes;
+        return minhasCompras;
     }
   }

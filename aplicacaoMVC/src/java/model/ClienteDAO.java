@@ -69,7 +69,7 @@ public class ClienteDAO{
             return cliente;
 
         } catch (SQLException e) {
-            throw new RuntimeException("Query de select (get) incorreta");
+            throw new RuntimeException("Query de select (Cliente) incorreta");
         } finally {
             conexao.closeConexao();
         }
@@ -88,10 +88,11 @@ public class ClienteDAO{
             sql.setString(7, cliente.getCep());
             sql.setString(8, cliente.getTelefone());
             sql.setString(9, cliente.getEmail());
+            //sql.setInt(10, cliente.getId());
             sql.executeUpdate();
 
         } catch (SQLException e) {
-            throw new RuntimeException("Query de update (alterar) incorreta");
+            throw new RuntimeException("Query de update (Cliente) incorreta");
         } finally {
             conexao.closeConexao();
         }
@@ -105,7 +106,7 @@ public class ClienteDAO{
             sql.executeUpdate();
 
         } catch (SQLException e) {
-            throw new RuntimeException("Query de delete (excluir) incorreta");
+            throw new RuntimeException("Query de delete (Cliente) incorreta");
         } finally {
             conexao.closeConexao();
         }
@@ -114,7 +115,7 @@ public class ClienteDAO{
         ArrayList<Cliente> meusClientes = new ArrayList();
         Conexao conexao = new Conexao();
         try {
-            String selectSQL = "SELECT * FROM funcionarios order by nome";
+            String selectSQL = "SELECT * FROM clientes order by nome";
             PreparedStatement preparedStatement;
             preparedStatement = conexao.getConexao().prepareStatement(selectSQL);
             ResultSet resultado = preparedStatement.executeQuery();
@@ -134,7 +135,7 @@ public class ClienteDAO{
                 }
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Query de select (ListaDeFuncionarios) incorreta");
+            throw new RuntimeException("Query de select <ListaDeClientes> (Cliente) incorreta");
         } finally {
             conexao.closeConexao();
         }

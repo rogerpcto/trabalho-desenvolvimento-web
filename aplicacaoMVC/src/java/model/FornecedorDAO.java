@@ -69,7 +69,7 @@ public class FornecedorDAO{
             return fornecedor;
 
         } catch (SQLException e) {
-            throw new RuntimeException("Query de select (get) incorreta");
+            throw new RuntimeException("Query de select get (Fornecedor) incorreta");
         } finally {
             conexao.closeConexao();
         }
@@ -88,10 +88,11 @@ public class FornecedorDAO{
             sql.setString(7, fornecedor.getCep());
             sql.setString(8, fornecedor.getTelefone());
             sql.setString(9, fornecedor.getEmail());
+            //sql.setInt(10, fornecedor.getId());
             sql.executeUpdate();
 
         } catch (SQLException e) {
-            throw new RuntimeException("Query de update (alterar) incorreta");
+            throw new RuntimeException("Query de update alterar (Fornecedor) incorreta");
         } finally {
             conexao.closeConexao();
         }
@@ -114,7 +115,7 @@ public class FornecedorDAO{
         ArrayList<Fornecedor> meusFornecedores = new ArrayList();
         Conexao conexao = new Conexao();
         try {
-            String selectSQL = "SELECT * FROM funcionarios order by nome";
+            String selectSQL = "SELECT * FROM fornecedores order by nome";
             PreparedStatement preparedStatement;
             preparedStatement = conexao.getConexao().prepareStatement(selectSQL);
             ResultSet resultado = preparedStatement.executeQuery();
@@ -134,7 +135,7 @@ public class FornecedorDAO{
                 }
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Query de select (ListaDeFuncionarios) incorreta");
+            throw new RuntimeException("Query de select ListaDeFornecedores (Fornecedor) incorreta");
         } finally {
             conexao.closeConexao();
         }

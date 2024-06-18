@@ -5,6 +5,7 @@ public class Categoria {
     private int id;
     private String nomeCategoria;
   
+    public Categoria(){}
 
     public Categoria(int id,String nomeCategoria) {
         this.nomeCategoria = nomeCategoria;
@@ -18,11 +19,11 @@ public class Categoria {
         this.id = id;
     }
 
-    public String getNomeProduto() {
+    public String getNomeCategoria() {
         return nomeCategoria;
     }
 
-    public void setNomeProduto(String nomeCategoria) {
+    public void setNomeCategoria(String nomeCategoria) {
         this.nomeCategoria = nomeCategoria;
     }
 
