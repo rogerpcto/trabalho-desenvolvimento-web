@@ -1,18 +1,20 @@
 package entidade;
 
-import java.time.LocalDate;
+import java.sql.Date;
 
 public class Venda {
 
     private int id;
     private int quantidade;
-    private LocalDate data;
+    private Date data;
     private float valor;
     private Cliente cliente;
     private Produto produto;
     private Funcionario vendedor;
 
-    public Venda( int quantidade, LocalDate data, float valor, Cliente cliente, Produto produto, Funcionario vendedor) {
+    public Venda() {}
+
+    public Venda( int quantidade, Date data, float valor, Cliente cliente, Produto produto, Funcionario vendedor) {
         this.quantidade = quantidade;
         this.data = data;
         this.valor = valor;
@@ -37,11 +39,11 @@ public class Venda {
         this.quantidade = quantidade;
     }
 
-    public LocalDate getData() {
+    public Date getData() {
         return data;
     }
 
-    public void setData(LocalDate data) {
+    public void setData(Date data) {
         this.data = data;
     }
 

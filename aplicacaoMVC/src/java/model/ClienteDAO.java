@@ -122,6 +122,7 @@ public class ClienteDAO{
             if (resultado != null) {
                 while (resultado.next()) {
                     Cliente cliente = new Cliente();
+                    cliente.setId(resultado.getInt("ID"));
                     cliente.setNome(resultado.getString("NOME"));
                     cliente.setCpf(resultado.getString("CPF"));
                     cliente.setEndereco(resultado.getString("ENDERECO"));

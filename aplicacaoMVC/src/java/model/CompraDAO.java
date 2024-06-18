@@ -31,7 +31,7 @@ public class CompraDAO{
     public void Inserir(Compra compra) throws Exception {
         Conexao conexao = new Conexao();
         try {
-            PreparedStatement sql = conexao.getConexao().prepareStatement("INSERT INTO compras (quantidade_compra, data_compra, valor_compra, id_fornecedor, id_produto, id_comprador)"
+            PreparedStatement sql = conexao.getConexao().prepareStatement("INSERT INTO compras (quantidade_compra, data_compra, valor_compra, id_fornecedor, id_produto, id_funcionario)"
                     + " VALUES (?,?,?,?,?,?)");
             sql.setInt(1, compra.getQuantidade());
             sql.setDate(2, compra.getData());
@@ -59,6 +59,7 @@ public class CompraDAO{
                     "JOIN fornecedores ON compras.id_fornecedor = fornecedores.id\n" +
                     "JOIN produtos ON compras.id_produto = produtos.id\n" +
                     "JOIN funcionarios ON compras.id_funcionario = funcionarios.id \n" +
+                    "JOIN categorias ON categorias.id = produtos.id_categoria \n" +
                     "WHERE compras.ID = ?;");
             sql.setInt(1, id);
             ResultSet resultado = sql.executeQuery();
@@ -124,14 +125,14 @@ public class CompraDAO{
     public void Alterar(Compra compra) throws Exception {
         Conexao conexao = new Conexao();
         try {
-            PreparedStatement sql = conexao.getConexao().prepareStatement("UPDATE compras SET quantidade_compra = ?, data_compra = ?, valor_compra = ?, id_fornecedor = ?, id_produto = ?, id_comprador WHERE ID = ? ");
+            PreparedStatement sql = conexao.getConexao().prepareStatement("UPDATE compras SET quantidade_compra = ?, data_compra = ?, valor_compra = ?, id_fornecedor = ?, id_produto = ?, id_funcionario WHERE ID = ? ");
             sql.setInt(1, compra.getQuantidade());
             sql.setDate(2, compra.getData());
             sql.setInt(3, compra.getValor());
             sql.setInt(4, compra.getFornecedor().getId());
             sql.setInt(5, compra.getProduto().getId());
             sql.setInt(6, compra.getComprador().getId());
-            //sql.setInt(7, compra.getId());?
+            sql.setInt(7, compra.getId());
             sql.executeUpdate();
 
         } catch (SQLException e) {
@@ -158,7 +159,12 @@ public class CompraDAO{
         ArrayList<Compra> minhasCompras = new ArrayList();
         Conexao conexao = new Conexao();
         try {
-            String selectSQL = "SELECT * FROM compras order by nome";
+            String selectSQL = "SELECT *, funcionarios.email as email_funcionario, fornecedores.email as email_fornecedor\n" +
+                    "FROM compras \n" +
+                    "JOIN fornecedores ON compras.id_fornecedor = fornecedores.id\n" +
+                    "JOIN produtos ON compras.id_produto = produtos.id\n" +
+                    "JOIN funcionarios ON compras.id_funcionario = funcionarios.id \n" +
+                    "JOIN categorias ON categorias.id = produtos.id_categoria \n";
             PreparedStatement preparedStatement;
             preparedStatement = conexao.getConexao().prepareStatement(selectSQL);
             ResultSet resultado = preparedStatement.executeQuery();

@@ -57,8 +57,8 @@ public class FornecedorDAO{
                     fornecedor.setRazaoSocial(resultado.getString("RAZAO_SOCIAL"));
                     fornecedor.setCnpj(resultado.getString("CPNJ"));
                     fornecedor.setEndereco(resultado.getString("ENDERECO"));
-                    fornecedor.setBairro ( resultado.getString("BAIRRO"));
-                    fornecedor.setCidade( resultado.getString("CIDADE"));
+                    fornecedor.setBairro (resultado.getString("BAIRRO"));
+                    fornecedor.setCidade(resultado.getString("CIDADE"));
                     fornecedor.setUf(resultado.getString("UF"));
                     fornecedor.setCep(resultado.getString("CEP")); 
                     fornecedor.setTelefone(resultado.getString("TELEFONE"));
@@ -88,7 +88,7 @@ public class FornecedorDAO{
             sql.setString(7, fornecedor.getCep());
             sql.setString(8, fornecedor.getTelefone());
             sql.setString(9, fornecedor.getEmail());
-            //sql.setInt(10, fornecedor.getId());
+            sql.setInt(10, fornecedor.getId());
             sql.executeUpdate();
 
         } catch (SQLException e) {
@@ -122,11 +122,12 @@ public class FornecedorDAO{
             if (resultado != null) {
                 while (resultado.next()) {
                     Fornecedor fornecedor = new Fornecedor();
+                    fornecedor.setId(resultado.getInt("ID"));
                     fornecedor.setRazaoSocial(resultado.getString("RAZAO_SOCIAL"));
                     fornecedor.setCnpj(resultado.getString("CPNJ"));
                     fornecedor.setEndereco(resultado.getString("ENDERECO"));
-                    fornecedor.setBairro ( resultado.getString("BAIRRO"));
-                    fornecedor.setCidade( resultado.getString("CIDADE"));
+                    fornecedor.setBairro (resultado.getString("BAIRRO"));
+                    fornecedor.setCidade(resultado.getString("CIDADE"));
                     fornecedor.setUf(resultado.getString("UF"));
                     fornecedor.setCep(resultado.getString("CEP")); 
                     fornecedor.setTelefone(resultado.getString("TELEFONE"));

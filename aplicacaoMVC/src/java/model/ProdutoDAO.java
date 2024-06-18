@@ -60,6 +60,7 @@ public class ProdutoDAO{
             if (resultado != null) {
                 while (resultado.next()) {
                     
+                    produto.setId(resultado.getInt("ID"));
                     produto.setNomeProduto(resultado.getString("NOME_PRODUTO"));
                     produto.setDescricao(resultado.getString("DESCRICAO"));
                     produto.setPrecoCompra(resultado.getFloat("PRECO_COMPRA"));
@@ -95,6 +96,7 @@ public class ProdutoDAO{
             sql.setInt(5, produto.getQuantidadeDisponivel());
             sql.setString(6, produto.getLiberadoVenda());
             sql.setInt(7, produto.getCategoria().getId());
+            sql.setInt(8, produto.getId());
             sql.executeUpdate();
 
         } catch (SQLException e) {
@@ -130,6 +132,7 @@ public class ProdutoDAO{
             if (resultado != null) {
                 while (resultado.next()) {
                     Produto produto = new Produto();
+                    produto.setId(resultado.getInt("ID"));
                     produto.setNomeProduto(resultado.getString("NOME_PRODUTO"));
                     produto.setDescricao(resultado.getString("DESCRICAO"));
                     produto.setPrecoCompra(resultado.getFloat("PRECO_COMPRA"));

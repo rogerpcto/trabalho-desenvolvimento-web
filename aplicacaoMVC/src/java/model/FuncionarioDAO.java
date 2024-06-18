@@ -111,7 +111,8 @@ public class FuncionarioDAO{
                     Funcionario funcionario = new Funcionario(resultado.getString("NOME"),
                             resultado.getString("CPF"),
                             Integer.parseInt(resultado.getString("PAPEL")),
-                            resultado.getString("SENHA"));
+                            resultado.getString("SENHA"),
+                            resultado.getString("EMAIL"));
                     funcionario.setId(Integer.parseInt(resultado.getString("id")));
                     meusFuncionarios.add(funcionario);
                 }
