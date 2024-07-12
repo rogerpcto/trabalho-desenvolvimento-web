@@ -32,11 +32,16 @@ public class VendaController extends HttpServlet {
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
         RequestDispatcher rd;
+        int id_produto = Integer.parseInt(request.getParameter("id"));
+        try {
+            ProdutoDAO produtoDAO = new ProdutoDAO();
+            Produto produto = produtoDAO.getProduto(id_produto);
+            request.setAttribute("produto", produto);
+        }catch (Exception e) {}
         rd = request.getRequestDispatcher("/views/venda/cadastrarVenda.jsp");
         rd.forward(request, response);
-
     }
     
     @Override

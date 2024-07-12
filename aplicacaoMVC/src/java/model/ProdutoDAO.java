@@ -52,8 +52,8 @@ public class ProdutoDAO{
             PreparedStatement sql = conexao.getConexao().prepareStatement(
                     "SELECT *, categorias.id as id_categoria \n" +
                     "FROM produtos \n" +
-                    "JOIN ON categorias WHERE categorias.id = produtos.id_categoria \n" +
-                    "WHERE produtos.ID = ?;");
+                    "JOIN categorias ON categorias.id = produtos.id_categoria \n" +
+                    "WHERE produtos.id = ?;");
             sql.setInt(1, id);
             ResultSet resultado = sql.executeQuery();
             Produto produto = new Produto();
@@ -65,7 +65,7 @@ public class ProdutoDAO{
                     produto.setDescricao(resultado.getString("DESCRICAO"));
                     produto.setPrecoCompra(resultado.getFloat("PRECO_COMPRA"));
                     produto.setPrecoVenda(resultado.getFloat("PRECO_VENDA"));
-                    produto.setQuantidadeDisponivel(resultado.getInt("QUANTIDADE_DISPONIVEL"));
+                    produto.setQuantidadeDisponivel(resultado.getInt("QUANTIDADE_DISPONÍVEL"));
                     produto.setLiberadoVenda(resultado.getString("LIBERADO_VENDA"));
 
                     Categoria categoria = new Categoria();
