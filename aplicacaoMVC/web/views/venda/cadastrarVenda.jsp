@@ -43,7 +43,7 @@
 <body>
     <div class="container">
         <div class="col-sm-6 mt-5 mb-5">
-            <form action="processa_venda.jsp" method="post">
+            <form action="VendasController" method="post">
                 <div class="mb-3">
                     <% 
                         Produto produto = (Produto) request.getAttribute("produto");
@@ -56,6 +56,7 @@
                             <p class="card-text">Preço: R$ <%= produto.getPrecoVenda() %></p>
                             <p class="card-text">Quantidade Disponível: <span id="quantidade_disponivel"><%= produto.getQuantidadeDisponivel() %></span></p>
                             <input type="hidden" id="preco_venda" value="<%= produto.getPrecoVenda() %>">
+                            <input type="hidden" name="id_produto" value="<%= produto.getId() %>">
                         </div>
                     </div>
                     <% 

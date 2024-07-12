@@ -4,10 +4,6 @@
  */
 package controller;
 
-import entidade.Categoria;
-import entidade.Cliente;
-import entidade.Funcionario;
-import entidade.Produto;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,7 +11,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.CategoriaDAO;
 import model.ProdutoDAO;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -23,6 +18,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import model.ClienteDAO;
 import model.FuncionarioDAO;
+import model.VendaDAO;
+import entidade.Cliente;
+import entidade.Funcionario;
+import entidade.Produto;
+import entidade.Venda;
 /**
  *
  * @author Logan
@@ -58,16 +58,15 @@ public class VendaController extends HttpServlet {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         try {
             Date data = sdf.parse(data_string);
-        } catch (ParseException e) {
-        }
-        CategoriaDAO categoriaDAO = new CategoriaDAO();
-        try {
             ProdutoDAO produtoDAO = new ProdutoDAO();
+            Produto produto = produtoDAO.getProduto(id_produto);
             ClienteDAO clienteDAO = new ClienteDAO();
+            Cliente cliente = clienteDAO.getCliente(id_cliente);
             FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-            ArrayList<Produto> produto = produtoDAO.ListaDeProdutos();
-            ArrayList<Funcionario> funcionario = funcionarioDAO.ListaDeVendedores();
-            ArrayList<Cliente> clientes = clienteDAO.ListaDeClientes();
+            Funcionario funcionario = funcionarioDAO.getFuncionario(id_funcionario);
+            Venda venda = new Venda(quantidade_venda, data, valor_venda, cliente, produto, funcionario);
+            VendaDAO vendaDAO = new VendaDAO();
+            vendaDAO.Inserir(venda);
         }catch (Exception e) {}
         rd = request.getRequestDispatcher("/views/venda/cadastrarVenda.jsp");
         rd.forward(request, response);
