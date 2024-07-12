@@ -13,6 +13,22 @@ public class Cliente {
     private String telefone;
     private String email;
 
+    public Cliente(){
+        
+    }
+    
+    public Cliente(String nome,String cpf,String endereco,String bairro,String cidade,String uf,String cep,String telefone,String email){
+        this.nome = nome;
+        this.cpf = cpf;
+        this.endereco = endereco;
+        this.bairro = bairro;
+        this.cidade = cidade;
+        this.uf = uf;
+        this.cep = cep;
+        this.telefone = telefone;
+        this.email = email;
+    }
+    
     public int getId() {
         return id;
     }

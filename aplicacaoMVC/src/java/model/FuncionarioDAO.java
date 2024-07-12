@@ -152,5 +152,31 @@ public class FuncionarioDAO{
             conexao.closeConexao();
         }
     }
-
+    
+   public ArrayList<Funcionario> ListaDeVendedores() {
+        ArrayList<Funcionario> vendedores = new ArrayList();
+        Conexao conexao = new Conexao();
+        try {
+            String selectSQL = "SELECT * FROM funcionarios WHERE papel = 2";
+            PreparedStatement preparedStatement;
+            preparedStatement = conexao.getConexao().prepareStatement(selectSQL);
+            ResultSet resultado = preparedStatement.executeQuery();
+            if (resultado != null) {
+                while (resultado.next()) {
+                    Funcionario funcionario = new Funcionario(resultado.getString("NOME"),
+                            resultado.getString("CPF"),
+                            Integer.parseInt(resultado.getString("PAPEL")),
+                            resultado.getString("SENHA"),
+                            resultado.getString("EMAIL"));
+                    funcionario.setId(Integer.parseInt(resultado.getString("id")));
+                    vendedores.add(funcionario);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Query de select (ListaDeVendedores) incorreta");
+        } finally {
+            conexao.closeConexao();
+        }
+        return vendedores;
+    }
 }

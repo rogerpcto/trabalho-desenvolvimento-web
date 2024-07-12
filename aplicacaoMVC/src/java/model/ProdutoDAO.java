@@ -26,7 +26,7 @@ public class ProdutoDAO{
     public void Inserir(Produto produto) throws Exception {
         Conexao conexao = new Conexao();
         try {
-            PreparedStatement sql = conexao.getConexao().prepareStatement("INSERT INTO produtos (nome_produto, descricao, preco_compra, preco_venda, quantidade_disponivel, liberado_venda, id_categoria)"
+            PreparedStatement sql = conexao.getConexao().prepareStatement("INSERT INTO produtos (nome_produto, descricao, preco_compra, preco_venda, quantidade_disponível, liberado_venda, id_categoria)"
                     + " VALUES (?,?,?,?,?,?,?)");
             sql.setString(1, produto.getNomeProduto());
             sql.setString(2, produto.getDescricao());
@@ -137,7 +137,7 @@ public class ProdutoDAO{
                     produto.setDescricao(resultado.getString("DESCRICAO"));
                     produto.setPrecoCompra(resultado.getFloat("PRECO_COMPRA"));
                     produto.setPrecoVenda(resultado.getFloat("PRECO_VENDA"));
-                    produto.setQuantidadeDisponivel(resultado.getInt("QUANTIDADE_DISPONIVEL"));
+                    produto.setQuantidadeDisponivel(resultado.getInt("QUANTIDADE_DISPONÍVEL"));
                     produto.setLiberadoVenda(resultado.getString("LIBERADO_VENDA"));
                     
                     Categoria categoria = new Categoria();

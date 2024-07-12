@@ -14,6 +14,7 @@
                         Funcionario funcionarioLogado = (Funcionario) session.getAttribute("funcionario");
                         if (funcionarioLogado != null) { %>
                             <a class="nav-link" href="/aplicacaoMVC/admin/dashboard">Dashboard</a>
+                            <a class="nav-link" href="/aplicacaoMVC/CadastrarCliente">Cadastrar Cliente</a>
                             <a class="nav-link" href="/aplicacaoMVC/admin/CategoriaController?acao=Listar">Categorias</a>
                             <a class="nav-link" href="/aplicacaoMVC/admin/logOut">Logout</a>
                 <%  } else { %>

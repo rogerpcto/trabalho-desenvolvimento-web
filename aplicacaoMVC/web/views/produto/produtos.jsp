@@ -1,3 +1,6 @@
+<%@page import="entidade.Categoria"%>
+<%@page import="java.util.List"%>
+<%@page import="model.CategoriaDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -10,23 +13,54 @@
 <body>
     <div class="container">
         <div class="col-sm-6 mt-5 mb-5">
-            <form action="" method="post">
+            <form action="ProdutosController" method="post">
                 <div class="mb-3">
                     <label for="nome_produtos" class="form-label">Nome do Produto</label>
                     <input required
                         maxlength="255"
                         type="text"
                         class="form-control"
-                        name="descricao"
-                        id="descricao"
+                        name="nome_produto"
+                        id="nome_produto"
                         aria-describedby="helpId"
                     />
                     <small id="helpId" class="form-text text-muted">Nome do Produto</small>
                 </div>
                 <div class="mb-3">
+                <label for="descricao" class="form-label">Descrição</label>
+                    <input required
+                        maxlength="5" minlength="1"
+                        type="text"
+                        class="form-control"
+                        name="descricao"
+                        id="descricao"
+                        aria-describedby="helpId"
+                    />
+                    <small id="helpId" class="form-text text-muted">Descrição</small>
+                </div>
+                 <div class="mb-3">
+                    <label for="categoria" class="form-label">Categoria</label>
+                    <select class="form-select" name="categoria" id="categoria" required aria-describedby="helpId">
+                        <%
+                            // Consultando as categorias do banco de dados
+                            CategoriaDAO categoriaDAO = new CategoriaDAO();
+                            List<Categoria> categorias = categoriaDAO.ListaDeCategorias();
+
+                            // Gerando as opções do dropdown
+                            for (Categoria categoria : categorias) {
+                        %>
+                            <option value="<%= categoria.getId() %>"><%= categoria.getNomeCategoria() %></option>
+                        <%
+                            }
+                        %>
+                    </select>
+                    <small id="helpId" class="form-text text-muted">Categoria</small>
+                </div>
+       
+                <div class="mb-3">
                     <label for="preco_compra" class="form-label">Preço de Compra</label>
                     <input required
-                        maxlength="50" minlength="3"
+                        maxlength="50" minlength="1"
                         type="text"
                         class="form-control"
                         name="preco_compra"
@@ -38,7 +72,7 @@
                 <div class="mb-3">
                     <label for="preco_venda" class="form-label">Preço de Venda</label>
                     <input required
-                        maxlength="50" minlength="3"
+                        maxlength="50" minlength="1"
                         type="text"
                         class="form-control"
                         name="preco_venda"
@@ -60,7 +94,7 @@
                     <small id="helpId" class="form-text text-muted">Quantidade Disponível</small>
                 </div>
                 <div class="mb-3">
-                    <input class="form-check-input" type="checkbox" value="" id="liberar_venda">
+                    <input class="form-check-input" type="checkbox" value="true" id="liberar_venda" name="liberado_venda">
                     <label class="form-check-label" for="liberar_venda">
                         Liberar Venda
                     </label>
