@@ -61,16 +61,17 @@
                     <small id="helpId" class="form-text text-muted">E-mail do Funcionário</small>
                 </div>
                 <div class="mb-3">
-                    <label for="tipo" class="form-label">Tipo</label>
-                    <input required
-                        maxlength="1"
-                        type="text"
-                        class="form-control"
-                        name="tipo"
-                        id="tipo"
-                        aria-describedby="helpId"
-                    />
-                    <small id="helpId" class="form-text text-muted">Tipo do Funcionário</small>
+                    <label for="papel" class="form-label">Papel</label>
+                    <select required class="form-select" name="papel" id="papel" aria-describedby="helpId">
+                        <%
+                            for (Papel papel : Papel.name()) {
+                        %>
+                            <option value="<%= papel.getPapel() %>"><%= papel.name() %></option>
+                        <%
+                            }
+                        %>
+                    </select>
+                    <small id="helpId" class="form-text text-muted">Papel do Funcionário</small>
                 </div>
                 <button type="submit" class="btn btn-primary">Entrar</button>
             </form>
