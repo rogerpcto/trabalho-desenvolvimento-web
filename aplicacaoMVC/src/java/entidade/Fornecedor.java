@@ -14,6 +14,18 @@ public class Fornecedor {
     private String email;
 
     public Fornecedor(){};
+
+    public Fornecedor(String razaoSocial, String cnpj, String endereco, String bairro, String cidade, String uf, String cep, String telefone, String email) {
+        this.razaoSocial = razaoSocial;
+        this.cnpj = cnpj;
+        this.endereco = endereco;
+        this.bairro = bairro;
+        this.cidade = cidade;
+        this.uf = uf;
+        this.cep = cep;
+        this.telefone = telefone;
+        this.email = email;
+    }
     
     public Fornecedor(int id, String razaoSocial, String cnpj, String endereco, String bairro, String cidade, String uf, String cep, String telefone, String email) {
         this.id = id;

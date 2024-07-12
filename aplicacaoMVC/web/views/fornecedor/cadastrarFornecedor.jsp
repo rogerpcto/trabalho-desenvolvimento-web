@@ -17,8 +17,8 @@
                         maxlength="50" minlength="3"
                         type="text"
                         class="form-control"
-                        name="razao-social"
-                        id="razao-social"
+                        name="razao_social"
+                        id="razao_social"
                         aria-describedby="helpId"
                     />
                     <small id="helpId" class="form-text text-muted">Razão Social do Fornecedor</small>
