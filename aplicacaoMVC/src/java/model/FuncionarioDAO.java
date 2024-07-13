@@ -157,7 +157,7 @@ public class FuncionarioDAO{
         ArrayList<Funcionario> vendedores = new ArrayList();
         Conexao conexao = new Conexao();
         try {
-            String selectSQL = "SELECT * FROM funcionarios WHERE papel = 2";
+            String selectSQL = "SELECT * FROM funcionarios WHERE papel = 1";
             PreparedStatement preparedStatement;
             preparedStatement = conexao.getConexao().prepareStatement(selectSQL);
             ResultSet resultado = preparedStatement.executeQuery();

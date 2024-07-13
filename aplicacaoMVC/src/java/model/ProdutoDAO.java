@@ -88,7 +88,7 @@ public class ProdutoDAO{
     public void Alterar(Produto produto) throws Exception {
         Conexao conexao = new Conexao();
         try {
-            PreparedStatement sql = conexao.getConexao().prepareStatement("UPDATE produtos SET nome_produto = ?, descricao = ?, preco_compra = ?, preco_venda = ?, quantidade_disponivel = ?, liberado_venda = ?, id_categoria = ?  WHERE ID = ? ");
+            PreparedStatement sql = conexao.getConexao().prepareStatement("UPDATE produtos SET nome_produto = ?, descricao = ?, preco_compra = ?, preco_venda = ?, quantidade_disponível = ?, liberado_venda = ?, id_categoria = ?  WHERE ID = ? ");
             sql.setString(1, produto.getNomeProduto());
             sql.setString(2, produto.getDescricao());
             sql.setFloat(3, produto.getPrecoCompra());

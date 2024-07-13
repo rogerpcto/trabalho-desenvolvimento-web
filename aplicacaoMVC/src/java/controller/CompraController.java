@@ -53,7 +53,8 @@ public class CompraController extends HttpServlet {
         String data_string = request.getParameter("data_compra");
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         try {
-            Date data = sdf.parse(data_string);
+            Date utilDate = sdf.parse(data_string);
+            java.sql.Date data = new java.sql.Date(utilDate.getTime());
             ProdutoDAO produtoDAO = new ProdutoDAO();
             Produto produto = produtoDAO.getProduto(id_produto);
             FornecedorDAO FornecedorDAO = new FornecedorDAO();

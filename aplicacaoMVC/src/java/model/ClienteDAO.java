@@ -63,6 +63,7 @@ public class ClienteDAO{
                     cliente.setCep(resultado.getString("CEP")); 
                     cliente.setTelefone(resultado.getString("TELEFONE"));
                     cliente.setEmail(resultado.getString("EMAIL"));
+                    cliente.setId(resultado.getInt("ID"));
                 }
                 
             }

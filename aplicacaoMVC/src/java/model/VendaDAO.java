@@ -32,7 +32,7 @@ public class VendaDAO{
     public void Inserir(Venda venda) throws Exception {
         Conexao conexao = new Conexao();
         try {
-            PreparedStatement sql = conexao.getConexao().prepareStatement("INSERT INTO compras (quantidade_venda, data_venda, valor_venda, id_cliente, id_produto, id_funcionario)"
+            PreparedStatement sql = conexao.getConexao().prepareStatement("INSERT INTO vendas (quantidade_venda, data_venda, valor_venda, id_cliente, id_produto, id_funcionario)"
                     + " VALUES (?,?,?,?,?,?)");
             sql.setInt(1, venda.getQuantidade());
             sql.setDate(2, venda.getData());

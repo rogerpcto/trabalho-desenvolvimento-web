@@ -97,7 +97,7 @@
                     <label for="data_venda" class="form-label">Data</label>
                     <input required
                            maxlength="10" minlength="10"
-                           type="text"
+                           type="date"
                            class="form-control"
                            name="data_venda"
                            id="data_venda"
@@ -107,7 +107,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="Cliente" class="form-label">Cliente</label>
-                    <select class="form-select" name="Cliente" id="Cliente" required aria-describedby="helpId">
+                    <select class="form-select" name="id_cliente" id="id_cliente" required aria-describedby="helpId">
                         <%
                             ClienteDAO clienteDAO = new ClienteDAO();
                             List<Cliente> clientes = clienteDAO.ListaDeClientes();
@@ -123,7 +123,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="Funcionario" class="form-label">Funcionário</label>
-                    <select class="form-select" name="Funcionario" id="Funcionario" required aria-describedby="helpId">
+                    <select class="form-select" name="id_funcionario" id="id_funcionario" required aria-describedby="helpId">
                         <%
                             FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
                             List<Funcionario> funcionarios = funcionarioDAO.ListaDeVendedores();

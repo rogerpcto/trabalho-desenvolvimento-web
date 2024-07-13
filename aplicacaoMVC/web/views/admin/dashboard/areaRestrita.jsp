@@ -45,6 +45,7 @@
                     ProdutoDAO produtoDAO = new ProdutoDAO();
                     List<Produto> produtos = produtoDAO.ListaDeProdutos();
                     for (Produto produto : produtos) {
+                    if (produto.getQuantidadeDisponivel() > 0 && produto.getLiberadoVenda().equals("S")){
                 %>
                 <tr>
                     <td><%= produto.getId() %></td>
@@ -71,6 +72,7 @@
                 </tr>
                 <%
                     }
+                }        
                 %>
             </tbody>
         </table>

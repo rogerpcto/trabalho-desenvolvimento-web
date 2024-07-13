@@ -86,4 +86,8 @@ public Produto(String nome, String descricao, float precoCompra, float precoVend
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
+    
+    public void atualizaQuantidade(int quantidade){
+        this.quantidadeDisponivel += quantidade;
+    }
 }

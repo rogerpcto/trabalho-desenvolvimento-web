@@ -49,15 +49,14 @@ public class VendaController extends HttpServlet {
             throws ServletException, IOException {
 
         RequestDispatcher rd;
-        int id_funcionario = Integer.parseInt(request.getParameter("funcionario"));
-        int id_produto = Integer.parseInt(request.getParameter("produto"));
-        int id_cliente = Integer.parseInt(request.getParameter("cliente"));
+        int id_funcionario = Integer.parseInt(request.getParameter("id_funcionario"));
+        int id_produto = Integer.parseInt(request.getParameter("id_produto"));
+        int id_cliente = Integer.parseInt(request.getParameter("id_cliente"));
         float valor_venda = Float.parseFloat(request.getParameter("valor_venda"));
         int quantidade_venda = Integer.parseInt(request.getParameter("quantidade_venda"));
         String data_string = request.getParameter("data_venda");
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         try {
-            Date data = sdf.parse(data_string);
+            java.sql.Date data = java.sql.Date.valueOf(data_string);
             ProdutoDAO produtoDAO = new ProdutoDAO();
             Produto produto = produtoDAO.getProduto(id_produto);
             ClienteDAO clienteDAO = new ClienteDAO();
@@ -67,8 +66,10 @@ public class VendaController extends HttpServlet {
             Venda venda = new Venda(quantidade_venda, data, valor_venda, cliente, produto, funcionario);
             VendaDAO vendaDAO = new VendaDAO();
             vendaDAO.Inserir(venda);
+            produto.atualizaQuantidade(-quantidade_venda);
+            produtoDAO.Alterar(produto);
         }catch (Exception e) {}
-        rd = request.getRequestDispatcher("/views/venda/cadastrarVenda.jsp");
+        rd = request.getRequestDispatcher("/views/admin/dashboard/areaRestrita.jsp");
         rd.forward(request, response);
     }
 }
