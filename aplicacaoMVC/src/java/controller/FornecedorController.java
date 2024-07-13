@@ -19,7 +19,7 @@ public class FornecedorController extends HttpServlet {
             throws ServletException, IOException {
 
         RequestDispatcher rd;
-        rd = request.getRequestDispatcher("/viewsfFornecedor/cadastrarFornecedor.jsp");
+        rd = request.getRequestDispatcher("/views/fornecedor/cadastrarFornecedor.jsp");
         rd.forward(request, response);
 
     }
@@ -31,6 +31,7 @@ public class FornecedorController extends HttpServlet {
         RequestDispatcher rd;
         String razao_social = request.getParameter("razao_social");
         String cnpj = request.getParameter("cnpj");
+        //formatar cnpj de forma correta
         String endereco = request.getParameter("endereco");
         String bairro = request.getParameter("bairro");
         String cidade = request.getParameter("cidade");
@@ -43,7 +44,7 @@ public class FornecedorController extends HttpServlet {
             FornecedorDAO fornecedorDAO = new FornecedorDAO();
             fornecedorDAO.Inserir(fornecedor);
         }catch (Exception e) {}
-        rd = request.getRequestDispatcher("/views/Fornecedor/cadastrarFornecedor.jsp");
+        rd = request.getRequestDispatcher("/views/fornecedor/cadastrarFornecedor.jsp");
         rd.forward(request, response);
     }      
 }
