@@ -12,20 +12,39 @@
                     HttpSession sessao = request.getSession(false);
                     if (sessao != null) {
                         Funcionario funcionarioLogado = (Funcionario) session.getAttribute("funcionario");
-                        if (funcionarioLogado != null) { %>
-                            <a class="nav-link" href="/aplicacaoMVC/admin/dashboard">Dashboard</a>
+                        if (funcionarioLogado == null) { 
+
+                    %>
+                        <a class="nav-link" href="/aplicacaoMVC/ProdutosController">Produtos</a>
+                        <a class="nav-link" href="/aplicacaoMVC/AutenticaController?acao=Login">Login</a>
+                            
+                <%  }
+                    else {
+                        switch (funcionarioLogado.getPapel()){
+                            case ADMINISTRADOR:
+                %>
+                            
+                            <a class="nav-link" href="/aplicacaoMVC/CadastrarFuncionario">Cadastrar Funcionário</a>
+                <%
+                            break;
+                            case VENDEDOR:
+                %>
                             <a class="nav-link" href="/aplicacaoMVC/CadastrarCliente">Cadastrar Cliente</a>
+                <%
+                                break;
+                            case COMPRADOR:
+                %>
                             <a class="nav-link" href="/aplicacaoMVC/admin/CategoriaController?acao=Listar">Categorias</a>
-                            <a class="nav-link" href="/aplicacaoMVC/admin/logOut">Logout</a>
-                <%  } else { %>
-                
-                                <a class="nav-link" href="/aplicacaoMVC/ProdutosController">Produtos</a>
-                            <a class="nav-link" href="/aplicacaoMVC/AutenticaController?acao=Login">Login</a>
-                <%    }
-                    }%>
 
-
-
+                <%
+                                break;
+                        }
+                %>
+                    <a class="nav-link" href="/aplicacaoMVC/admin/logOut">Logout</a>
+                <%
+                    }
+                }
+                %>
             </div>
         </div>
     </div>

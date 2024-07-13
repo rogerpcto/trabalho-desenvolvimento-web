@@ -75,7 +75,6 @@ public class AutenticaController extends HttpServlet {
                 }    
                 rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);
-               
 
             } else {
                 request.setAttribute("msgError", "Usuário e/ou senha incorreto");

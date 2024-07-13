@@ -1,17 +1,24 @@
-<%-- 
-    Document   : home
-    Created on : 12 de jul. de 2024, 23:46:04
-    Author     : Logan
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
+<html lang="pt-br">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="#">
+        <title>Área Restrita</title>
+        <link href="http://localhost:8080/aplicacaoMVC/views/bootstrap/bootstrap.min.css"  rel="stylesheet">
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <div class="container">
+            <jsp:include page="../../comum/menu.jsp" />
+            <div class="mt-5">
+
+                <h1>Área Restrita</h1>
+                <%
+                    Funcionario funcionarioLogado = (Funcionario) session.getAttribute("funcionario");
+                    out.println("<h3>Administrador logado com sucesso</h3>");
+                    out.println("<h2>Nome: " + funcionarioLogado.getNome() + "</h2>");
+                %>
+            </div>
+        </div>
     </body>
 </html>

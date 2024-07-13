@@ -45,7 +45,7 @@
                     ProdutoDAO produtoDAO = new ProdutoDAO();
                     List<Produto> produtos = produtoDAO.ListaDeProdutos();
                     for (Produto produto : produtos) {
-                    if (produto.getQuantidadeDisponivel() > 0 && produto.getLiberadoVenda().equals("S")){
+                    if (produto.getQuantidadeDisponivel() > 0){
                 %>
                 <tr>
                     <td><%= produto.getId() %></td>
@@ -67,6 +67,10 @@
                         <form action="excluirProduto.jsp" method="post" style="display:inline;">
                             <input type="hidden" name="id" value="<%= produto.getId() %>"/>
                             <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+                        </form>
+                        <form action="LiberarProdutoController" method="post" style="display:inline;">
+                            <input type="hidden" name="id" value="<%= produto.getId() %>"/>
+                            <button type="submit" class="btn btn-danger btn-sm"><%= produto.getLiberadoVenda().equals("S") ? "Bloquear" : "Liberar" %></button>
                         </form>
                     </td>
                 </tr>
