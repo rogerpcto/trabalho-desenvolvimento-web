@@ -122,23 +122,15 @@
                 </div>
                 <div class="mb-3">
                     <label for="Funcionario" class="form-label">Funcionário</label>
-                    <select class="form-select" name="id_funcionario" id="id_funcionario" required aria-describedby="helpId">
-                        <% 
-                            try {
-                                FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-                                List<Funcionario> funcionarios = funcionarioDAO.ListaDeVendedores();
-                                for (Funcionario funcionario : funcionarios) {
-                        %>
-                        <option value="<%= funcionario.getId() %>">
-                            <%= funcionario.getNome() %>
-                        </option>
-                        <% 
-                                }
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        %>
-                    </select>
+                    <%
+                        HttpSession session = request.getSession(false);
+                        Funcionario funcionario = null;
+                    
+                        if (session != null) {
+                            funcionario = (Funcionario) session.getAttribute("funcionario");
+                        }
+                    %>
+                    <input type="text" class="form-control" id="funcionario" name="funcionario" value="<%= funcionario.getNome() %>" disabled>
                     <small id="helpId" class="form-text text-muted">Funcionário</small>
                 </div>
                 <button type="submit" class="btn btn-primary">Comprar</button>

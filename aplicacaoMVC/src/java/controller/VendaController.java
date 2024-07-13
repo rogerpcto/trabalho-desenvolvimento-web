@@ -49,7 +49,6 @@ public class VendaController extends HttpServlet {
             throws ServletException, IOException {
 
         RequestDispatcher rd;
-        int id_funcionario = Integer.parseInt(request.getParameter("id_funcionario"));
         int id_produto = Integer.parseInt(request.getParameter("id_produto"));
         int id_cliente = Integer.parseInt(request.getParameter("id_cliente"));
         float valor_venda = Float.parseFloat(request.getParameter("valor_venda"));
@@ -61,8 +60,8 @@ public class VendaController extends HttpServlet {
             Produto produto = produtoDAO.getProduto(id_produto);
             ClienteDAO clienteDAO = new ClienteDAO();
             Cliente cliente = clienteDAO.getCliente(id_cliente);
-            FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-            Funcionario funcionario = funcionarioDAO.getFuncionario(id_funcionario);
+            HttpSession session = request.getSession();
+            Funcionario funcionario = (Funcionario) session.getAttribute("funcionario");
             Venda venda = new Venda(quantidade_venda, data, valor_venda, cliente, produto, funcionario);
             VendaDAO vendaDAO = new VendaDAO();
             vendaDAO.Inserir(venda);

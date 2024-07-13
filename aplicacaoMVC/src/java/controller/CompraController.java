@@ -57,8 +57,8 @@ public class CompraController extends HttpServlet {
             Produto produto = produtoDAO.getProduto(id_produto);
             FornecedorDAO fornecedorDAO = new FornecedorDAO();
             Fornecedor fornecedor = fornecedorDAO.getFornecedor(id_fornecedor);
-            FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-            Funcionario funcionario = funcionarioDAO.getFuncionario(id_funcionario);
+            HttpSession session = request.getSession();
+            Funcionario funcionario = (Funcionario) session.getAttribute("funcionario");
             Compra compra = new Compra(quantidade_compra, data, valor_compra, fornecedor, produto, funcionario);
             CompraDAO compraDAO = new CompraDAO();
             compraDAO.Inserir(compra);
