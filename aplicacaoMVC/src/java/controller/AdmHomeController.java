@@ -13,15 +13,15 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author hp
  */
-@WebServlet(name = "home", urlPatterns = {"/home"})
-public class HomeController extends HttpServlet {
+@WebServlet(name = "AdministradorHome", urlPatterns = {"/administrador/home"})
+public class AdmHomeController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         RequestDispatcher rd;
-        rd = request.getRequestDispatcher("/views/public/home.jsp");
+        rd = request.getRequestDispatcher("/views/administrador/home.jsp");
         rd.forward(request, response);
 
     }

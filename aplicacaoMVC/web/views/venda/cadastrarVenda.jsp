@@ -137,7 +137,7 @@
                     </select>
                     <small id="helpId" class="form-text text-muted">Funcionário</small>
                 </div>
-                <button type="submit" class="btn btn-primary">Entrar</button>
+                <button type="submit" class="btn btn-primary">Vender</button>
             </form>
         </div>
     </div>

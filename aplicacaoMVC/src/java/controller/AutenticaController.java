@@ -1,6 +1,7 @@
 package controller;
 
 import entidade.Funcionario;
+import entidade.Papel;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -56,9 +57,25 @@ public class AutenticaController extends HttpServlet {
             if (funcionarioObtido.getId() != 0) {
                 HttpSession session = request.getSession();
                 session.setAttribute("funcionario", funcionarioObtido);
-
-                rd = request.getRequestDispatcher("/admin/dashboard");
+                String url = "";
+                
+                switch (funcionarioObtido.getPapel()){
+                    
+                    case ADMINISTRADOR:
+                        url = "/administrador/home";
+                        break;
+                
+                    case COMPRADOR:
+                        url = "/comprador/home";
+                        break;
+                        
+                    case VENDEDOR:
+                        url = "/vendedor/home";
+                        break;    
+                }    
+                rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);
+               
 
             } else {
                 request.setAttribute("msgError", "Usuário e/ou senha incorreto");
