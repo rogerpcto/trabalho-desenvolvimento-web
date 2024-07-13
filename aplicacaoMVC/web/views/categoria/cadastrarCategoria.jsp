@@ -10,7 +10,7 @@
 <body>
     <div class="container">
         <div class="col-sm-6 mt-5 mb-5">
-            <form action="<%= request.getContextPath() %>/yourServlet" method="post">
+            <form action="CadastrarCategoria" method="post">
                 <div class="mb-3">
                     <label for="nome_categoria" class="form-label">Categoria</label>
                     <input required

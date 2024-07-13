@@ -25,7 +25,7 @@ public class CategoriaDAO{
     public void Inserir(Categoria categoria) throws Exception {
         Conexao conexao = new Conexao();
         try {
-            PreparedStatement sql = conexao.getConexao().prepareStatement("INSERT INTO categorias (nome_categoria = ?)"
+            PreparedStatement sql = conexao.getConexao().prepareStatement("INSERT INTO categorias (nome_categoria)"
                     + " VALUES (?)");
             sql.setString(1, categoria.getNomeCategoria());
             sql.executeUpdate();
