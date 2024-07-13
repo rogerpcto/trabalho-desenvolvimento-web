@@ -29,7 +29,7 @@ import entidade.Compra;
  *
  * @author Logan
  */
-@WebServlet(name = "CompraController", urlPatterns = {"/ComprasController"})
+@WebServlet(name = "ComprasController", urlPatterns = {"/ComprasController"})
 public class CompraController extends HttpServlet {
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -45,20 +45,18 @@ public class CompraController extends HttpServlet {
             throws ServletException, IOException {
 
         RequestDispatcher rd;
-        int id_funcionario = Integer.parseInt(request.getParameter("funcionario"));
-        int id_produto = Integer.parseInt(request.getParameter("produto"));
-        int id_fornecedor = Integer.parseInt(request.getParameter("fornecedor"));
+        int id_funcionario = Integer.parseInt(request.getParameter("id_funcionario"));
+        int id_produto = Integer.parseInt(request.getParameter("id_produto"));
+        int id_fornecedor = Integer.parseInt(request.getParameter("id_fornecedor"));
         int valor_compra = Integer.parseInt(request.getParameter("valor_compra"));
         int quantidade_compra = Integer.parseInt(request.getParameter("quantidade_compra"));
         String data_string = request.getParameter("data_compra");
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         try {
-            Date utilDate = sdf.parse(data_string);
-            java.sql.Date data = new java.sql.Date(utilDate.getTime());
+            java.sql.Date data = java.sql.Date.valueOf(data_string);
             ProdutoDAO produtoDAO = new ProdutoDAO();
             Produto produto = produtoDAO.getProduto(id_produto);
-            FornecedorDAO FornecedorDAO = new FornecedorDAO();
-            Fornecedor fornecedor = FornecedorDAO.getFornecedor(id_fornecedor);
+            FornecedorDAO fornecedorDAO = new FornecedorDAO();
+            Fornecedor fornecedor = fornecedorDAO.getFornecedor(id_fornecedor);
             FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
             Funcionario funcionario = funcionarioDAO.getFuncionario(id_funcionario);
             Compra compra = new Compra(quantidade_compra, data, valor_compra, fornecedor, produto, funcionario);
