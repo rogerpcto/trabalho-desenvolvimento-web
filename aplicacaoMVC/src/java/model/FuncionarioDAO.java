@@ -25,12 +25,13 @@ public class FuncionarioDAO{
     public void Inserir(Funcionario funcionario) throws Exception {
         Conexao conexao = new Conexao();
         try {
-            PreparedStatement sql = conexao.getConexao().prepareStatement("INSERT INTO funcionarios (nome, cpf, endereco, senha)"
-                    + " VALUES (?,?,?,?)");
+            PreparedStatement sql = conexao.getConexao().prepareStatement("INSERT INTO funcionarios (nome, cpf, papel, senha, email)"
+                    + " VALUES (?,?,?,?,?)");
             sql.setString(1, funcionario.getNome());
             sql.setString(2, funcionario.getCpf());
             sql.setInt(3, funcionario.getPapel().ordinal());
             sql.setString(4, funcionario.getSenha());
+            sql.setString(5, funcionario.getEmail());
             sql.executeUpdate();
 
         } catch (SQLException e) {
@@ -158,6 +159,33 @@ public class FuncionarioDAO{
         Conexao conexao = new Conexao();
         try {
             String selectSQL = "SELECT * FROM funcionarios WHERE papel = 1";
+            PreparedStatement preparedStatement;
+            preparedStatement = conexao.getConexao().prepareStatement(selectSQL);
+            ResultSet resultado = preparedStatement.executeQuery();
+            if (resultado != null) {
+                while (resultado.next()) {
+                    Funcionario funcionario = new Funcionario(resultado.getString("NOME"),
+                            resultado.getString("CPF"),
+                            Integer.parseInt(resultado.getString("PAPEL")),
+                            resultado.getString("SENHA"),
+                            resultado.getString("EMAIL"));
+                    funcionario.setId(Integer.parseInt(resultado.getString("id")));
+                    vendedores.add(funcionario);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Query de select (ListaDeVendedores) incorreta");
+        } finally {
+            conexao.closeConexao();
+        }
+        return vendedores;
+    }
+   
+   public ArrayList<Funcionario> ListaDeCompradores() {
+        ArrayList<Funcionario> vendedores = new ArrayList();
+        Conexao conexao = new Conexao();
+        try {
+            String selectSQL = "SELECT * FROM funcionarios WHERE papel = 2";
             PreparedStatement preparedStatement;
             preparedStatement = conexao.getConexao().prepareStatement(selectSQL);
             ResultSet resultado = preparedStatement.executeQuery();

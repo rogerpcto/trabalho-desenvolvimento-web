@@ -1,3 +1,4 @@
+<%@page import="entidade.Papel"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -10,7 +11,7 @@
 <body>
     <div class="container">
         <div class="col-sm-6 mt-5 mb-5">
-            <form action="<%= request.getContextPath() %>/yourServlet" method="post">
+            <form action = "CadastrarFuncionario" method="post">
                 <div class="mb-3">
                     <label for="nome" class="form-label">Nome</label>
                     <input required
@@ -64,16 +65,16 @@
                     <label for="papel" class="form-label">Papel</label>
                     <select required class="form-select" name="papel" id="papel" aria-describedby="helpId">
                         <%
-                            for (Papel papel : Papel.name()) {
+                            for (Papel papel : Papel.values()) {
                         %>
-                            <option value="<%= papel.getPapel() %>"><%= papel.name() %></option>
+                            <option value="<%= papel.ordinal() %>"><%= papel.toString() %></option>
                         <%
                             }
                         %>
                     </select>
                     <small id="helpId" class="form-text text-muted">Papel do Funcionário</small>
                 </div>
-                <button type="submit" class="btn btn-primary">Entrar</button>
+                <button type="submit" class="btn btn-primary">Cadastrar</button>
             </form>
         </div>
     </div>
