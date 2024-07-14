@@ -12,6 +12,7 @@
 </head>
 <body>
     <div class="container">
+        <jsp:include page="../comum/menu.jsp" />
         <div class="col-sm-6 mt-5 mb-5">
             <form action="ProdutosController" method="post">
                 <div class="mb-3">

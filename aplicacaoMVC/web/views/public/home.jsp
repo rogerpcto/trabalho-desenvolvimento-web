@@ -13,8 +13,8 @@
         <div class="container">
             <jsp:include page="../comum/menu.jsp" />
             <div class="mt-5">
-                <h3>Seja Bem-vindo ao blog Blogado</h3>
-                <h4>Aqui comentamos sobre vários assuntos</h4>
+                <h3>Seja Bem-vindo a loja do Logan</h3>
+                <h4>Aqui vendemos vários produtos</h4>
             </div>
         </div>
        <script src="http://localhost:8080/aplicacaoMVC/views/bootstrap/bootstrap.bundle.min.js"></script>
