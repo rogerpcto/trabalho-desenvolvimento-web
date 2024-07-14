@@ -63,7 +63,7 @@ public class ProdutoAlterarController extends HttpServlet {
             ProdutoDAO produtodao = new ProdutoDAO();
             produtodao.Alterar(produto);
         }catch (Exception e) {}
-        response.sendRedirect("home");
+        response.sendRedirect("/aplicacaoMVC/comprador/listarProdutos");
     }
 }
 

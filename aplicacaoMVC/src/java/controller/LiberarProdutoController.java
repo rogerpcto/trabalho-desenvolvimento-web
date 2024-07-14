@@ -38,6 +38,6 @@ public class LiberarProdutoController extends HttpServlet {
             produto.setLiberadoVenda(liberadoVenda);
             produtoDAO.Alterar(produto);
         }catch (Exception e) {}
-        response.sendRedirect("/aplicacaoMVC/comprador/home");
+        response.sendRedirect("/aplicacaoMVC/comprador/listarProdutos");
     }
 }
