@@ -45,7 +45,7 @@ public class CompradorAlterarCompraController extends HttpServlet {
         int id  = request.getParameter("id");
         float valor_compra = request.getParameter("valor_compra");
         int quantidade_compra = request.getParameter("quantidade_compra");
-        string data_compra = request.getParameter("data_compra");
+        String data_compra = request.getParameter("data_compra");
         java.sql.Date data = java.sql.Date.valueOf(data_string);
         try {
             Compra compra = new Compra(id, quantidade_compra, data, valor_compra,id_fornecedor,id_produto,id_comprador);
