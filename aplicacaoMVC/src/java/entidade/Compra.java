@@ -25,6 +25,16 @@ public class Compra {
         this.produto = produto;
         this.comprador = comprador;
     }
+        public Compra(int id, int quantidade, Date data, int valor, Fornecedor fornecedor, Produto produto, Funcionario comprador) {
+        this.id = id;
+        this.quantidade = quantidade;
+        this.data = data;
+        this.valor = valor;
+        this.fornecedor = fornecedor;
+        this.produto = produto;
+        this.comprador = comprador;
+    }
+
 
     public int getId() {
         return id;

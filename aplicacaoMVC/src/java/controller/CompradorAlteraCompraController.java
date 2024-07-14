@@ -45,8 +45,9 @@ public class CompradorAlterarCompraController extends HttpServlet {
         int id  = request.getParameter("id");
         float valor_compra = request.getParameter("valor_compra");
         int quantidade_compra = request.getParameter("quantidade_compra");
+        Date data_compra = request.getParameter("data_compra");
         try {
-            Compra compra = new Compra(id, quantidade_compra, valor_compra,id_fornecedor,id_produto,id_comprador,);
+            Compra compra = new Compra(id, quantidade_compra,data_compra, valor_compra,id_fornecedor,id_produto,id_comprador);
             CompraDAO CompraDAO = new CompraDAO();
             CompraDAO.Alterar(fornecedor);
         }catch (Exception e) {}
