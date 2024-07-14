@@ -42,11 +42,11 @@
                     <td><%= funcionario.getSenha() %></td>
                     <td><%= funcionario.getEmail() %></td>
                     <td>
-                        <form action="alterarFuncionario" method="get" style="display:inline;">
+                        <form action="/aplicacaoMVC/funcionario/alterar" method="get" style="display:inline;">
                             <input type="hidden" name="id" value="<%= funcionario.getId() %>"/>
                             <button type="submit" class="btn btn-primary btn-sm">Alterar</button>
                         </form>
-                        <form action="excluirFuncionario" method="post" style="display:inline;">
+                        <form action="/aplicacaoMVC/funcionario/excluir" method="post" style="display:inline;">
                             <input type="hidden" name="id" value="<%= funcionario.getId() %>"/>
                             <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
                         </form>
