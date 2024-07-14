@@ -52,8 +52,14 @@
                     <td><%= cliente.getTelefone() %></td>
                     <td><%= cliente.getEmail() %></td>
                     <td>
-                        <a href="alterarCliente?id=<%= cliente.getId() %>" class="btn btn-primary btn-sm">Alterar</a>
-                        <a href="excluirCliente?id=<%= cliente.getId() %>" class="btn btn-danger btn-sm">Excluir</a>
+                        <form action="/aplicacaoMVC/vendedor/alterarCliente" method="get" style="display:inline;">
+                            <input type="hidden" name="id_cliente" value="<%= cliente.getId() %>"/>
+                            <button type="submit" class="btn btn-primary btn-sm">Alterar</button>
+                        </form>
+                        <form action="excluirCliente" method="post" style="display:inline;">
+                            <input type="hidden" name="id" value="<%= cliente.getId() %>"/>
+                            <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+                        </form>
                     </td>
                 </tr>
                 <%

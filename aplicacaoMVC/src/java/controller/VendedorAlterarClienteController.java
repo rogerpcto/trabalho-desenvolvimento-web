@@ -1,8 +1,8 @@
 package controller;
 
 import entidade.Categoria;
+import entidade.Cliente;
 import entidade.Fornecedor;
-import entidade.Funcionario;
 import entidade.Produto;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
@@ -13,24 +13,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.CategoriaDAO;
+import model.ClienteDAO;
 import model.FornecedorDAO;
-import model.FuncionarioDAO;
 import model.ProdutoDAO;
 
-@WebServlet(name = "VendedorAlteraVendaController", urlPatterns = {"/vendedor/alterarVenda"})
-public class VendedorAlteraVendaController extends HttpServlet {
+@WebServlet(name = "VendedorAlterarClienteController", urlPatterns = {"/vendedor/alterarCliente"})
+public class VendedorAlterarClienteController extends HttpServlet {
     
      protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         RequestDispatcher rd;
-        int id_vendedor = Integer.parseInt(request.getParameter("id_funcionario"));
+        int id_cliente = Integer.parseInt(request.getParameter("id_cliente"));
         try {
-            FuncionarioDAO vendedorDAO = new FuncionarioDAO();
-            Funcionario vendedor = vendedorDAO.getFuncionario(id_vendedor);
-            request.setAttribute("vendedor", vendedor);
+            ClienteDAO clienteDAO = new ClienteDAO();
+            Cliente cliente = clienteDAO.getCliente(id_cliente);
+            request.setAttribute("cliente", cliente);
         }catch (Exception e) {}
-        rd = request.getRequestDispatcher("/views/venda/alterarVendedor.jsp");
+        rd = request.getRequestDispatcher("/views/cliente/alterarCliente.jsp");
         rd.forward(request, response);
 
     }
@@ -41,9 +41,9 @@ public class VendedorAlteraVendaController extends HttpServlet {
             throws ServletException, IOException {
         
         RequestDispatcher rd;
-        int id_fornecedor = Integer.parseInt(request.getParameter("id_fornecedor"));
-        String razao_social = request.getParameter("razao_social");
-        String cnpj = request.getParameter("cnpj");
+        int id = Integer.parseInt(request.getParameter("id"));
+        String nome = request.getParameter("nome");
+        String cpf = request.getParameter("cpf");
         String endereco = request.getParameter("endereco");
         String bairro = request.getParameter("bairro");
         String cidade = request.getParameter("cidade");
@@ -52,12 +52,12 @@ public class VendedorAlteraVendaController extends HttpServlet {
         String telefone = request.getParameter("telefone");
         String email = request.getParameter("email");
         try {
-            Fornecedor fornecedor = new Fornecedor(id_fornecedor, razao_social, cnpj, endereco, bairro, cidade, uf, cep, telefone, email);
-            FornecedorDAO fornecedorDAO = new FornecedorDAO();
-            fornecedorDAO.Alterar(fornecedor);
+            Cliente cliente = new Cliente(nome, cpf, endereco, bairro, cidade, uf, cep, telefone, email);
+            cliente.setId(id);
+            ClienteDAO clienteDAO = new ClienteDAO();
+            clienteDAO.Alterar(cliente);
         }catch (Exception e) {}
-         response.sendRedirect("/aplicacaoMVC/comprador/listarFornecedor");
+        rd = request.getRequestDispatcher("/views/cliente/listarClientes.jsp");
+        rd.forward(request, response);
     } 
 }
-
-

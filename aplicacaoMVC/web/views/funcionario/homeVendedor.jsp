@@ -27,7 +27,7 @@
     <div class="container">
         <h1 class="mt-5">Lista de Produtos</h1>
         <div class="mt-3">
-            <a href="listarClientes" class="btn btn-primary">Listar Cliente</a>
+            <a href="listarClientes" class="btn btn-primary">Listar Clientes</a>
             <a href="listarProdutos" class="btn btn-primary">Listar Produtos</a>
             <a href="listarVendas" class="btn btn-primary">Listar Vendas</a>
         </div>

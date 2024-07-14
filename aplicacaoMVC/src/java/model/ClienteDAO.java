@@ -89,7 +89,7 @@ public class ClienteDAO{
             sql.setString(7, cliente.getCep());
             sql.setString(8, cliente.getTelefone());
             sql.setString(9, cliente.getEmail());
-            //sql.setInt(10, cliente.getId());
+            sql.setInt(10, cliente.getId());
             sql.executeUpdate();
 
         } catch (SQLException e) {

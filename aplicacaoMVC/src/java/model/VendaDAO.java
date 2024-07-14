@@ -264,6 +264,77 @@ public class VendaDAO{
             conexao.closeConexao();
         }
     }
+    
+    public Venda getPrimeiraVendaCliente(int id) throws Exception {
+        Conexao conexao = new Conexao();
+        try {
+            PreparedStatement sql = conexao.getConexao().prepareStatement(
+                    "SELECT *, funcionarios.nome as nome_funcionario, funcionarios.email as email_funcionario\n" +
+                    "FROM vendas \n" +
+                    "JOIN clientes ON vendas.id_cliente = clientes.id\n" +
+                    "JOIN produtos ON vendas.id_produto = produtos.id\n" +
+                    "JOIN funcionarios ON vendas.id_funcionario = funcionarios.id \n" +
+                    "WHERE vendas.id_cliente = ? LIMIT 1;");
+            sql.setInt(1, id);
+            ResultSet resultado = sql.executeQuery();
+            Venda venda = new Venda();
+            if (resultado != null) {
+                while (resultado.next()) {
+                    venda.setQuantidade(resultado.getInt("QUANTIDADE_VENDA"));
+                    venda.setData(resultado.getDate("DATA_VENDA"));
+                    venda.setValor(resultado.getInt("VALOR_VENDA"));
+
+                    Cliente cliente = new Cliente();
+                    cliente.setId(resultado.getInt("ID_CLIENTE"));
+                    cliente.setNome(resultado.getString("NOME"));
+                    cliente.setCpf(resultado.getString("CPF"));
+                    cliente.setEndereco(resultado.getString("ENDERECO"));
+                    cliente.setBairro ( resultado.getString("BAIRRO"));
+                    cliente.setCidade( resultado.getString("CIDADE"));
+                    cliente.setUf(resultado.getString("UF"));
+                    cliente.setCep(resultado.getString("CEP")); 
+                    cliente.setTelefone(resultado.getString("TELEFONE"));
+                    cliente.setEmail(resultado.getString("EMAIL"));
+                    
+                    venda.setCliente(cliente);
+
+                    Produto produto = new Produto();
+                    produto.setId(resultado.getInt("ID_PRODUTO"));
+                    produto.setNomeProduto(resultado.getString("NOME_PRODUTO"));
+                    produto.setDescricao(resultado.getString("DESCRICAO"));
+                    produto.setPrecoCompra(resultado.getFloat("PRECO_COMPRA"));
+                    produto.setPrecoVenda(resultado.getFloat("PRECO_VENDA"));
+                    produto.setQuantidadeDisponivel(resultado.getInt("QUANTIDADE_DISPONIVEL"));
+                    produto.setLiberadoVenda(resultado.getString("LIBERADO_VENDA"));
+
+                    Categoria categoria = new Categoria();
+                    categoria.setId(resultado.getInt("ID_CATEGORIA"));
+                    categoria.setNomeCategoria(resultado.getString("NOME_CATEGORIA"));
+                    
+                    produto.setCategoria(categoria);
+                    venda.setProduto(produto);
+
+                    Funcionario vendedor = new Funcionario();
+                    vendedor.setId(resultado.getInt("ID_FUNCIONARIO"));
+                    vendedor.setNome(resultado.getString("NOME_FUNCIONARIO"));
+                    vendedor.setCpf(resultado.getString("CPF"));
+                    int intPapel = Integer.parseInt(resultado.getString("Papel"));
+                    vendedor.setPapel(Papel.values()[intPapel]);
+                    vendedor.setSenha(resultado.getString("SENHA"));
+                    vendedor.setEmail(resultado.getString("EMAIL_FUNCIONARIO"));
+                    
+                    venda.setVendedor(vendedor);
+                }
+                
+            }
+            return venda;
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Query de select (Venda) incorreta");
+        } finally {
+            conexao.closeConexao();
+        }
+    }
 
     public void Alterar(Venda venda) throws Exception {
         Conexao conexao = new Conexao();
