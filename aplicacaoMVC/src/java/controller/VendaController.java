@@ -69,7 +69,6 @@ public class VendaController extends HttpServlet {
             produto.atualizaQuantidade(-quantidade_venda);
             produtoDAO.Alterar(produto);
         }catch (Exception e) {}
-        rd = request.getRequestDispatcher("/views/admin/dashboard/areaRestrita.jsp");
-        rd.forward(request, response);
+         response.sendRedirect("home");
     }
 }

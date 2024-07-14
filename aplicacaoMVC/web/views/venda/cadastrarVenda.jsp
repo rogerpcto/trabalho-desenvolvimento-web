@@ -44,7 +44,7 @@
     <div class="container">
         <jsp:include page="../comum/menu.jsp" />
         <div class="col-sm-6 mt-5 mb-5">
-            <form action="VendasController" method="post">
+            <form action="vender" method="post">
                 <div class="mb-3">
                     <% 
                         Produto produto = (Produto) request.getAttribute("produto");
