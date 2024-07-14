@@ -53,6 +53,7 @@
             %>
                         <a class="nav-link" href="/aplicacaoMVC/cadastrarCategoria">Cadastrar Categoria</a>
                         <a class="nav-link" href="/aplicacaoMVC/cadastrarFornecedor">Cadastrar Fornecedor</a>
+                        <a class="nav-link" href="/aplicacaoMVC/ProdutosController">Cadastrar Produto</a>
                         <a class="nav-link" href="/aplicacaoMVC/cadastrarCompra">Comprar</a>
 
             <%

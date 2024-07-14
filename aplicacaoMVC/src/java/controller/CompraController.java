@@ -45,8 +45,6 @@ public class CompraController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        RequestDispatcher rd;
-        int id_funcionario = Integer.parseInt(request.getParameter("id_funcionario"));
         int id_produto = Integer.parseInt(request.getParameter("id_produto"));
         int id_fornecedor = Integer.parseInt(request.getParameter("id_fornecedor"));
         int valor_compra = Integer.parseInt(request.getParameter("valor_compra"));
@@ -56,6 +54,8 @@ public class CompraController extends HttpServlet {
             java.sql.Date data = java.sql.Date.valueOf(data_string);
             ProdutoDAO produtoDAO = new ProdutoDAO();
             Produto produto = produtoDAO.getProduto(id_produto);
+            produto.atualizaQuantidade(quantidade_compra);
+            produtoDAO.Alterar(produto);
             FornecedorDAO fornecedorDAO = new FornecedorDAO();
             Fornecedor fornecedor = fornecedorDAO.getFornecedor(id_fornecedor);
             HttpSession session = request.getSession();
@@ -64,7 +64,6 @@ public class CompraController extends HttpServlet {
             CompraDAO compraDAO = new CompraDAO();
             compraDAO.Inserir(compra);
         }catch (Exception e) {}
-        rd = request.getRequestDispatcher("/views/compra/cadastrarCompra.jsp");
-        rd.forward(request, response);
+        response.sendRedirect("comprador/home");
     }
 }

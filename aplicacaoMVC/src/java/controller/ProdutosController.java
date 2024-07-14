@@ -57,10 +57,6 @@ public class ProdutosController extends HttpServlet {
             ProdutoDAO produtodao = new ProdutoDAO();
             produtodao.Inserir(produto);
         }catch (Exception e) {}
-        
-        //levar usuario para pagina com todos os produtos
-        rd = request.getRequestDispatcher("/views/produto/produtos.jsp");
-        rd.forward(request, response);
-        
+        response.sendRedirect("comprador/home");
     }
 }

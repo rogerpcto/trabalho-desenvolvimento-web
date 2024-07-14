@@ -43,7 +43,7 @@
     <div class="container">
         <jsp:include page="../comum/menu.jsp" />
         <div class="col-sm-6 mt-5 mb-5">
-            <form action="ComprasController" method="post">
+            <form action="cadastrarCompra" method="post">
                 <div class="mb-3">
                     <label for="Produto" class="form-label">Produto</label>
                     <select class="form-select" name="id_produto" id="Produto" required aria-describedby="helpId">
