@@ -1,3 +1,5 @@
+<%@page import="entidade.Cliente"%>
+<%@page import="model.ClienteDAO"%>
 <%@ page contentType="text/html" pageEncoding="UTF-8" import="entidade.Funcionario" %>
 <%@ page import="model.ProdutoDAO" %>
 <%@ page import="entidade.Produto" %>
@@ -17,7 +19,7 @@
         <jsp:include page="../comum/menu.jsp" />
     </div>
     <div class="container">
-        <h1 class="mt-5">Lista de Produtos</h1>
+        <h1 class="mt-5">Lista de Clientes</h1>
         <table class="table table-bordered mt-3">
             <thead>
                 <tr>
@@ -40,7 +42,7 @@
                     for (Cliente cliente : clientes) {
                 %>
                 <tr>
-                    <td><%= cliente.getNomeProduto() %></td>
+                    <td><%= cliente.getNome() %></td>
                     <td><%= cliente.getCpf() %></td>
                     <td><%= cliente.getEndereco() %></td>
                     <td><%= cliente.getBairro() %></td>
@@ -50,7 +52,7 @@
                     <td><%= cliente.getTelefone() %></td>
                     <td><%= cliente.getEmail() %></td>
                     <td>
-                        <a href="alterarCliente?id=<%= cliente.getId() %>" class="btn btn-warning btn-sm">Alterar</a>
+                        <a href="alterarCliente?id=<%= cliente.getId() %>" class="btn btn-primary btn-sm">Alterar</a>
                         <a href="excluirCliente?id=<%= cliente.getId() %>" class="btn btn-danger btn-sm">Excluir</a>
                     </td>
                 </tr>
