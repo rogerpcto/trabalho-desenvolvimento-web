@@ -31,8 +31,10 @@
             <div class="navbar-nav">
                 <%
                 if (funcionarioLogado == null) {
-                    <a class="nav-link" href="/aplicacaoMVC/ProdutosController">Produtos</a>
+                %>
+                    <a class="nav-link" href="/aplicacaoMVC/listar/produtos">Produtos</a>
                     <a class="nav-link" href="/aplicacaoMVC/AutenticaController?acao=Login">Login</a>
+                <%    
                 }
                 else{
                     switch (funcionarioLogado.getPapel()){
