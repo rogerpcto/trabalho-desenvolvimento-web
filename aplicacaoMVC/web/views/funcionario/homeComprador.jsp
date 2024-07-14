@@ -26,7 +26,7 @@
     </div>
     <div class="container">
         <div class="mt-3">
-            <a href="listaFornecedor" class="btn btn-primary">Lista Fornecedor</a>
+            <a href="listarFornecedor" class="btn btn-primary">Lista Fornecedor</a>
             <a href="listarProdutos" class="btn btn-primary">Lista Produto</a>
             <a href="listaProduto" class="btn btn-primary">Lista Compra</a>
         </div>
