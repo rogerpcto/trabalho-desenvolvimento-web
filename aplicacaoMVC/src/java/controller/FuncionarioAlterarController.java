@@ -49,7 +49,7 @@ public class FuncionarioAlterarController extends HttpServlet {
             FuncionarioDAO funcionariodao = new FuncionarioDAO();
             funcionariodao.Alterar(funcionario);
         }catch (Exception e) {}
-        response.sendRedirect("home");
+        response.sendRedirect("/aplicacaoMVC/funcionarios/listar");
     }
 }
 

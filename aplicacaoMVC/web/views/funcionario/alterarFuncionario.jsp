@@ -14,11 +14,12 @@
     <div class="container">
         <jsp:include page="../comum/menu.jsp" />
         <div class="col-sm-6 mt-5 mb-5">
-            <form action="alterarFuncionario" method="post">
+            <form action="/aplicacaoMVC/funcionario/alterar" method="post">
                 <%
                     Funcionario funcionario = (Funcionario) request.getAttribute("funcionario");
                     %>
                     <div class="mb-3">
+                        <input type="hidden" name="id" value="<%= funcionario.getId() %>">
                         <label for="nome" class="form-label">Nome</label>
                         <input required
                             maxlength="50" minlength="3"
