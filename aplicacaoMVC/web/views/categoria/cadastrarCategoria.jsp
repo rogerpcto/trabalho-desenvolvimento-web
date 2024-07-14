@@ -11,7 +11,7 @@
     <div class="container">
         <jsp:include page="../comum/menu.jsp" />
         <div class="col-sm-6 mt-5 mb-5">
-            <form action="CadastrarCategoria" method="post">
+            <form action="cadastrarCategoria" method="post">
                 <div class="mb-3">
                     <label for="nome_categoria" class="form-label">Categoria</label>
                     <input required

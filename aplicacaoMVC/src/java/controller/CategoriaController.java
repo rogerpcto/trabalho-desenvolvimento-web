@@ -30,14 +30,12 @@ public class CategoriaController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        RequestDispatcher rd;
         String nome_categoria = request.getParameter("nome_categoria");
         try {
             Categoria categoria = new Categoria(nome_categoria);
             CategoriaDAO categoriaDAO = new CategoriaDAO();
             categoriaDAO.Inserir(categoria);
         }catch (Exception e) {}
-        rd = request.getRequestDispatcher("/views/categoria/cadastrarCategoria.jsp");
-        rd.forward(request, response);
+         response.sendRedirect("comprador/home");
     }      
 }

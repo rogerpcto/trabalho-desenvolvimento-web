@@ -12,7 +12,7 @@ import model.FornecedorDAO;
 import entidade.Cliente;
 import entidade.Fornecedor;
     
-@WebServlet(name = "CadastrarFornecedor", urlPatterns = {"/CadastrarFornecedor"})
+@WebServlet(name = "CadastrarFornecedor", urlPatterns = {"/cadastrarFornecedor"})
 public class FornecedorController extends HttpServlet {
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -44,7 +44,6 @@ public class FornecedorController extends HttpServlet {
             FornecedorDAO fornecedorDAO = new FornecedorDAO();
             fornecedorDAO.Inserir(fornecedor);
         }catch (Exception e) {}
-        rd = request.getRequestDispatcher("/views/fornecedor/cadastrarFornecedor.jsp");
-        rd.forward(request, response);
+         response.sendRedirect("comprador/home");
     }      
 }
