@@ -39,14 +39,14 @@ public class FuncionarioExcluirController extends HttpServlet {
             CompraDAO compraDAO = new CompraDAO();
             Compra compra = compraDAO.getPrimeiraCompraFuncionario(id);
             if (compra.getProduto() == null && venda.getProduto() == null){
-                funcionarioDAO.Excluir(produto);
+                funcionarioDAO.Excluir(funcionario);
             }
             else{
                 request.setAttribute("mensagem", "Não foi possível excluir o Funcionário, pois existem vendas e/ou compras associadas a ele.");
                 request.getRequestDispatcher("views/administrador/home.jsp").forward(request, response);
             }
         }catch (Exception e) {}
-        response.sendRedirect("home");
+        response.sendRedirect("/aplicacaoMVC/administrador/home");
     }
 }
 

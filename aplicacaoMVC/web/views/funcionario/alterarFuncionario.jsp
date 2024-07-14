@@ -27,6 +27,7 @@
                             name="nome"
                             id="nome"
                             aria-describedby="helpId"
+                            value="<%=funcionario.getNome()%>"
                         />
                         <small id="helpId" class="form-text text-muted">Nome do Funcionário</small>
                     </div>
@@ -40,6 +41,7 @@
                             id="cpf"
                             placeholder="999.999.999-99"
                             aria-describedby="helpId"
+                            value="<%=funcionario.getCpf()%>"
                         />
                         <small id="helpId" class="form-text text-muted">CPF do Funcionário</small>
                     </div>
@@ -52,6 +54,7 @@
                             name="senha"
                             id="senha"
                             aria-describedby="helpId"
+                            value="<%=funcionario.getSenha()%>"
                         />
                         <small id="helpId" class="form-text text-muted">Senha do Funcionário</small>
                     </div>
@@ -64,6 +67,7 @@
                             name="email"
                             id="email"
                             aria-describedby="helpId"
+                            value="<%=funcionario.getEmail()%>"
                         />
                         <small id="helpId" class="form-text text-muted">E-mail do Funcionário</small>
                     </div>

@@ -36,25 +36,17 @@ public class FuncionarioAlterarController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int id_produto = Integer.parseInt(request.getParameter("id_produto"));
-        String nome_produto = request.getParameter("nome_produto");
-        String descricao = request.getParameter("descricao");
-        int id_categoria = Integer.parseInt(request.getParameter("categoria"));
-        float preco_compra = Float.parseFloat(request.getParameter("preco_compra"));
-        float preco_venda = Float.parseFloat(request.getParameter("preco_venda"));
-        int quantidade_disponivel = Integer.parseInt(request.getParameter("quantidade_disponivel"));
-        String liberado_venda = request.getParameter("liberado_venda");
-        if (liberado_venda != null) {
-            liberado_venda = "S";
-        } else {
-        liberado_venda = "N";
-        }
-        CategoriaDAO categoriaDAO = new CategoriaDAO();
+        int id = Integer.parseInt(request.getParameter("id"));
+        RequestDispatcher rd;
+        String nome = request.getParameter("nome");
+        String cpf = request.getParameter("cpf");
+        String senha = request.getParameter("senha");
+        String email = request.getParameter("email");
+        int numero_papel = Integer.parseInt(request.getParameter("papel"));
         try {
-            Categoria categoria = categoriaDAO.getCategoria(id_categoria);
-            Produto produto = new Produto(id_produto, nome_produto, descricao, preco_compra, preco_venda, quantidade_disponivel, liberado_venda, categoria);
-            ProdutoDAO produtodao = new ProdutoDAO();
-            produtodao.Alterar(produto);
+            Funcionario funcionario = new Funcionario(id, nome, cpf, papel, senha, email);
+            FuncionarioDAO funcionariodao = new FuncionarioDAO();
+            funcionariodao.Alterar(funcionario);
         }catch (Exception e) {}
         response.sendRedirect("home");
     }
