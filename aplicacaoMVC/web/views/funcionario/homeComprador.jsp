@@ -9,16 +9,31 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="#">
-        <title>Área Restrita</title>
+        <title>Comprador</title>
         <link href="http://localhost:8080/aplicacaoMVC/views/bootstrap/bootstrap.min.css"  rel="stylesheet">
+        <style>
+            .aviso {
+                background-color: red;
+                color: white;
+                padding: 15px;
+                font-size: 24px;
+            }
+        </style>
     </head>
     <body>
         <div class="container">
             <jsp:include page="../comum/menu.jsp" />
             <div class="mt-5">
-
+                <% 
+                    String mensagem = (String) request.getAttribute("mensagem");
+                    if (mensagem != null) {
+                %>
+                <div class="aviso">
+                    <%= mensagem %>
+                </div>
                 <h1>Área Restrita</h1>
                 <%
+                    }
                     Funcionario funcionarioLogado = (Funcionario) session.getAttribute("funcionario");
                     out.println("<h3>Comprador logado com sucesso</h3>");
                     out.println("<h2>Nome: " + funcionarioLogado.getNome() + "</h2>");
