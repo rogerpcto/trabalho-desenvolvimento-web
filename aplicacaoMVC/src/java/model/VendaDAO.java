@@ -3,6 +3,7 @@ package model;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Date;
 
 import entidade.Categoria;
 import entidade.Cliente;
@@ -382,4 +383,35 @@ public class VendaDAO{
         }
         return minhasVendas;
     }
+
+    public ArrayList<Produto> TotalVendas(Date data) {
+        ArrayList<Produto> produtos = new ArrayList();
+        Conexao conexao = new Conexao();
+        try {
+            String selectSQL = "SELECT produtos.nome_produto, SUM(vendas.quantidade_venda) AS total_vendido" +
+                                "FROM vendas"
+                                "JOIN \n" +
+                                "    produtos ON vendas.id_produto = produtos.id\n" +
+                                "WHERE DATE(vendas.data_venda) = ? " +
+                                "GROUP BY produtos.id";
+
+            PreparedStatement preparedStatement;
+            preparedStatement = conexao.getConexao().prepareStatement(selectSQL);
+            ResultSet resultado = preparedStatement.executeQuery();
+            if (resultado != null) {
+                while (resultado.next()) {
+                    Produto produto = new Produto();
+                    produto.setNomeProduto(resultado.getString("NOME_PRODUTO"));
+                    produto.setQuantidadeDisponivel(resultado.getInt("total_vendido"));
+                    produtos.add(produto);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Query de select Total Vendas incorreta");
+        } finally {
+            conexao.closeConexao();
+        }
+        return produtos;
+    }
+
   }
