@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author hp
  */
-@WebServlet(name = "AdministradorHome", urlPatterns = {"/administrador/home"})
+@WebServlet(name = "AdmHomeController", urlPatterns = {"/administrador/home"})
 public class AdmHomeController extends HttpServlet {
 
     @Override

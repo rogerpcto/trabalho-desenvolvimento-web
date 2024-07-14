@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 import model.CategoriaDAO;
 import model.ClienteDAO;
     
-@WebServlet(name = "CadastrarCategoria", urlPatterns = {"/CadastrarCategoria"})
+@WebServlet(name = "CadastrarCategoria", urlPatterns = {"/cadastrarCategoria"})
 public class CategoriaController extends HttpServlet {
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

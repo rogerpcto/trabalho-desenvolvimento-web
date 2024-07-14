@@ -23,11 +23,12 @@ import entidade.Cliente;
 import entidade.Funcionario;
 import entidade.Produto;
 import entidade.Venda;
+import javax.servlet.http.HttpSession;
 /**
  *
  * @author Logan
  */
-@WebServlet(name = "VendaController", urlPatterns = {"/VendasController"})
+@WebServlet(name = "VendaController", urlPatterns = {"/vendedor/vender"})
 public class VendaController extends HttpServlet {
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

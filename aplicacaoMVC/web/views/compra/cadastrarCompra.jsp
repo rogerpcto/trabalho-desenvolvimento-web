@@ -41,6 +41,7 @@
 </head>
 <body>
     <div class="container">
+        <jsp:include page="../comum/menu.jsp" />
         <div class="col-sm-6 mt-5 mb-5">
             <form action="ComprasController" method="post">
                 <div class="mb-3">
@@ -123,9 +124,7 @@
                 <div class="mb-3">
                     <label for="Funcionario" class="form-label">Funcionário</label>
                     <%
-                        HttpSession session = request.getSession(false);
                         Funcionario funcionario = null;
-                    
                         if (session != null) {
                             funcionario = (Funcionario) session.getAttribute("funcionario");
                         }

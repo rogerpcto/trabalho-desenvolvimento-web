@@ -14,7 +14,7 @@
     </head>
     <body>
         <div class="container">
-            <jsp:include page="../../comum/menu.jsp" />
+            <jsp:include page="../comum/menu.jsp" />
             <div class="mt-5">
 
                 <h1>Área Restrita</h1>
@@ -56,7 +56,7 @@
                     <td><%= produto.getQuantidadeDisponivel() %></td>
                     <td><%= produto.getLiberadoVenda().equals("S") ? "Sim" : "Não" %></td>
                     <td>
-                        <form action="VendasController" method="get" style="display:inline;">
+                        <form action="vender" method="get" style="display:inline;">
                             <input type="hidden" name="id" value="<%= produto.getId() %>" />
                             <button type="submit" class="btn btn-success btn-sm">Vender</button>
                         </form>

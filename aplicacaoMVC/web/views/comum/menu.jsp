@@ -1,25 +1,40 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" import="entidade.Funcionario" %>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <%
+                    HttpSession sessao = request.getSession(false);
+                    if (sessao != null) {
+                        Funcionario funcionarioLogado = (Funcionario) session.getAttribute("funcionario");
+                        String url = "";
+                        if (funcionarioLogado == null) { 
+                 }
+                    else {
+                switch (funcionarioLogado.getPapel()){
+                    
+                    case ADMINISTRADOR:
+                        url = "administrador/home";
+                        break;
+                
+                    case COMPRADOR:
+                        url = "comprador/home";
+                        break;
+                        
+                    case VENDEDOR:
+                        url = "vendedor/home";
+                        break;    
+                }    
+                    %>
     <div class="container-fluid">
-        <a class="navbar-brand" href="/aplicacaoMVC/home">Home</a>
+        <a class="navbar-brand" href="/aplicacaoMVC/<%=url%>">Home</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <%
-                    // testar se está logado
-                    HttpSession sessao = request.getSession(false);
-                    if (sessao != null) {
-                        Funcionario funcionarioLogado = (Funcionario) session.getAttribute("funcionario");
-                        if (funcionarioLogado == null) { 
-
-                    %>
+                
                         <a class="nav-link" href="/aplicacaoMVC/ProdutosController">Produtos</a>
                         <a class="nav-link" href="/aplicacaoMVC/AutenticaController?acao=Login">Login</a>
                             
-                <%  }
-                    else {
+                <% 
                         switch (funcionarioLogado.getPapel()){
                             case ADMINISTRADOR:
                 %>
@@ -34,7 +49,8 @@
                                 break;
                             case COMPRADOR:
                 %>
-                            <a class="nav-link" href="/aplicacaoMVC/admin/CategoriaController?acao=Listar">Categorias</a>
+                            <a class="nav-link" href="/aplicacaoMVC/cadastrarCategoria">Cadastrar Categoria</a>
+                            <a class="nav-link" href="/aplicacaoMVC/cadastrarCompra">Comprar</a>
 
                 <%
                                 break;

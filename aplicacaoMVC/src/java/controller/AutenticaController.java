@@ -62,20 +62,18 @@ public class AutenticaController extends HttpServlet {
                 switch (funcionarioObtido.getPapel()){
                     
                     case ADMINISTRADOR:
-                        url = "/administrador/home";
+                        url = "administrador/home";
                         break;
                 
                     case COMPRADOR:
-                        url = "/comprador/home";
+                        url = "comprador/home";
                         break;
                         
                     case VENDEDOR:
-                        url = "/vendedor/home";
+                        url = "vendedor/home";
                         break;    
                 }    
-                rd = request.getRequestDispatcher(url);
-                rd.forward(request, response);
-
+                response.sendRedirect(url);
             } else {
                 request.setAttribute("msgError", "Usuário e/ou senha incorreto");
                 rd = request.getRequestDispatcher("/views/autenticacao/formLogin.jsp");

@@ -17,28 +17,27 @@ import javax.servlet.http.HttpSession;
 import model.CategoriaDAO;
 import model.ProdutoDAO;
 
-@WebServlet(name = "LiberarProdutoController", urlPatterns = {"/Produtos/Liberar"})
+@WebServlet(name = "LiberarProdutoController", urlPatterns = {"/comprador/liberar"})
 public class LiberarProdutoController extends HttpServlet {    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         RequestDispatcher rd;
-        // pegando os parâmetros do request
-        int quantidade_disponivel = Integer.parseInt(request.getParameter("id"));
+        int id = Integer.parseInt(request.getParameter("id"));
         ProdutoDAO produtoDAO = new ProdutoDAO();
         try {
-
             Produto produto = produtoDAO.getProduto(id);
             String liberadoVenda = produto.getLiberadoVenda();
-            liberadoVenda = liberadoVenda == "S" ? "N" : "S";
+            if (liberadoVenda.equals("S")){
+                liberadoVenda = "N";
+            }
+            else{
+                liberadoVenda = "S";
+            }
             produto.setLiberadoVenda(liberadoVenda);
             produtoDAO.Alterar(produto);
         }catch (Exception e) {}
-        
-        //levar usuario para pagina com todos os produtos
-        rd = request.getRequestDispatcher("/views/produto/produtos.jsp");
-        rd.forward(request, response);
-        
+        response.sendRedirect("/aplicacaoMVC/comprador/home");
     }
 }

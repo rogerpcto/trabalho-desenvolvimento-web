@@ -124,7 +124,7 @@
                 <div class="mb-3">
                     <label for="Funcionario" class="form-label">Funcionário</label>
                     <%
-                        HttpSession session = request.getSession(false);
+                        //HttpSession session = request.getSession(false);
                         Funcionario funcionario = null;
                     
                         if (session != null) {

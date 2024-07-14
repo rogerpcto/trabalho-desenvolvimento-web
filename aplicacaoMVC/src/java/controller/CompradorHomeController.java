@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author hp
  */
 @WebServlet(name = "CompradorHome", urlPatterns = {"/comprador/home"})
-public class AdmHomeController extends HttpServlet {
+public class CompradorHomeController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

@@ -25,11 +25,12 @@ import entidade.Fornecedor;
 import entidade.Funcionario;
 import entidade.Produto;
 import entidade.Compra;
+import javax.servlet.http.HttpSession;
 /**
  *
  * @author Logan
  */
-@WebServlet(name = "ComprasController", urlPatterns = {"/ComprasController"})
+@WebServlet(name = "ComprasController", urlPatterns = {"/cadastrarCompra"})
 public class CompraController extends HttpServlet {
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
