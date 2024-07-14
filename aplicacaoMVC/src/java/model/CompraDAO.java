@@ -374,33 +374,47 @@ public class CompraDAO{
         ArrayList<Compra> minhasCompras = new ArrayList();
         Conexao conexao = new Conexao();
         try {
-            String selectSQL = "SELECT *, funcionarios.email as email_funcionario, fornecedores.email as email_fornecedor\n" +
-                    "FROM compras \n" +
-                    "JOIN fornecedores ON compras.id_fornecedor = fornecedores.id\n" +
-                    "JOIN produtos ON compras.id_produto = produtos.id\n" +
-                    "JOIN funcionarios ON compras.id_funcionario = funcionarios.id \n" +
-                    "JOIN categorias ON categorias.id = produtos.id_categoria \n";
+            String selectSQL = "SELECT \n" +
+"                                compras.id as compras_id, compras.quantidade_compra, compras.data_compra, compras.valor_compra, \n" +
+"                                compras.id_fornecedor, compras.id_produto, compras.id_funcionario,\n" +
+"                                fornecedores.id as fornecedores_id, fornecedores.razao_social as nome_fornecedor, fornecedores.cnpj, fornecedores.endereco, fornecedores.bairro, \n" +
+"                                fornecedores.cidade, fornecedores.uf, fornecedores.cep, fornecedores.telefone, fornecedores.email,\n" +
+"                                produtos.id as produtos_id, produtos.nome_produto, produtos.descricao, produtos.preco_compra, \n" +
+"                                produtos.preco_venda, produtos.quantidade_disponível, produtos.liberado_venda , produtos.id_categoria,\n" +
+"                                funcionarios.id as funcionarios_id, funcionarios.nome as nome_funcionario, funcionarios.cpf as cpf_funcionario, \n" +
+"                                funcionarios.senha, funcionarios.papel, funcionarios.email as funcionario_email,\n" +
+"                                categorias.id as categorias_id, categorias.nome_categoria\n" +
+"                                FROM \n" +
+"                                    compras\n" +
+"                                JOIN \n" +
+"                                    fornecedores ON compras.id_fornecedor = fornecedores.id\n" +
+"                                JOIN \n" +
+"                                    produtos ON compras.id_produto = produtos.id\n" +
+"                                JOIN \n" +
+"                                    funcionarios ON compras.id_funcionario = funcionarios.id\n" +
+"                                JOIN \n" +
+"                                    categorias ON produtos.id_categoria = categorias.id";
             PreparedStatement preparedStatement;
             preparedStatement = conexao.getConexao().prepareStatement(selectSQL);
             ResultSet resultado = preparedStatement.executeQuery();
             if (resultado != null) {
                 while (resultado.next()) {
                     Compra compra = new Compra();
-                    compra.setQuantidade(resultado.getInt("QUANTIDADE"));
+                    compra.setQuantidade(resultado.getInt("QUANTIDADE_COMPRA"));
                     compra.setData(resultado.getDate("DATA_COMPRA"));
                     compra.setValor(resultado.getInt("VALOR_COMPRA"));
 
                     Fornecedor fornecedor = new Fornecedor();
                     fornecedor.setId(resultado.getInt("ID_FORNECEDOR"));
-                    fornecedor.setRazaoSocial(resultado.getString("RAZAO_SOCIAL"));
-                    fornecedor.setCnpj(resultado.getString("CPNJ"));
+                    fornecedor.setRazaoSocial(resultado.getString("NOME_FORNECEDOR"));
+                    fornecedor.setCnpj(resultado.getString("CNPJ"));
                     fornecedor.setEndereco(resultado.getString("ENDERECO"));
                     fornecedor.setBairro ( resultado.getString("BAIRRO"));
                     fornecedor.setCidade( resultado.getString("CIDADE"));
                     fornecedor.setUf(resultado.getString("UF"));
                     fornecedor.setCep(resultado.getString("CEP")); 
                     fornecedor.setTelefone(resultado.getString("TELEFONE"));
-                    fornecedor.setEmail(resultado.getString("EMAIL_FORNECEDOR"));
+                    fornecedor.setEmail(resultado.getString("EMAIL"));
                     
                     compra.setFornecedor(fornecedor);
 
@@ -410,7 +424,7 @@ public class CompraDAO{
                     produto.setDescricao(resultado.getString("DESCRICAO"));
                     produto.setPrecoCompra(resultado.getFloat("PRECO_COMPRA"));
                     produto.setPrecoVenda(resultado.getFloat("PRECO_VENDA"));
-                    produto.setQuantidadeDisponivel(resultado.getInt("QUANTIDADE_DISPONIVEL"));
+                    produto.setQuantidadeDisponivel(resultado.getInt("QUANTIDADE_DISPONÍVEL"));
                     produto.setLiberadoVenda(resultado.getString("LIBERADO_VENDA"));
 
                     Categoria categoria = new Categoria();
@@ -422,12 +436,12 @@ public class CompraDAO{
 
                     Funcionario comprador = new Funcionario();
                     comprador.setId(resultado.getInt("ID_FUNCIONARIO"));
-                    comprador.setNome(resultado.getString("NOME"));
-                    comprador.setCpf(resultado.getString("CPF"));
+                    comprador.setNome(resultado.getString("NOME_FUNCIONARIO"));
+                    comprador.setCpf(resultado.getString("CPF_FUNCIONARIO"));
                     int intPapel = Integer.parseInt(resultado.getString("Papel"));
                     comprador.setPapel(Papel.values()[intPapel]);
                     comprador.setSenha(resultado.getString("SENHA"));
-                    comprador.setEmail(resultado.getString("EMAIL_FUNCIONARIO"));
+                    comprador.setEmail(resultado.getString("FUNCIONARIO_EMAIL"));
                     
                     compra.setComprador(comprador);
                     minhasCompras.add(compra);

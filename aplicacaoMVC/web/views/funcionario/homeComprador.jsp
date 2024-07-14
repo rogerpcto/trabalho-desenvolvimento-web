@@ -28,7 +28,7 @@
         <div class="mt-3">
             <a href="listarFornecedor" class="btn btn-primary">Lista Fornecedor</a>
             <a href="listarProdutos" class="btn btn-primary">Lista Produto</a>
-            <a href="listaProduto" class="btn btn-primary">Lista Compra</a>
+            <a href="listarCompras" class="btn btn-primary">Lista Compra</a>
         </div>
     </div>
     <script src="http://localhost:8080/aplicacaoMVC/views/bootstrap/bootstrap.bundle.min.js"></script>
