@@ -24,9 +24,8 @@
         <table class="table table-bordered mt-3">
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Nome</th>
-                    <th>Quantidade Disponível</th>
+                    <th>Quantidade Vendido</th>
                 </tr>
             </thead>
             <tbody>
@@ -37,7 +36,6 @@
                     for (Produto produto : produtos) {
                 %>
                 <tr>
-                    <td><%= produto.getId() %></td>
                     <td><%= produto.getNomeProduto() %></td>
                     <td><%= produto.getQuantidadeDisponivel() %></td>
                 </tr>
