@@ -13,7 +13,7 @@
             <jsp:include page="../comum/menu.jsp" />
             <div class="mt-5">
 
-                <h1>√Årea Restrita</h1>
+                <h1>¡rea Restrita</h1>
                 <%
                     Funcionario funcionarioLogado = (Funcionario) session.getAttribute("funcionario");
                     out.println("<h3>Administrador logado com sucesso</h3>");
@@ -23,9 +23,9 @@
         </div>
         <div class="container">
             <div class="mt-3">
-                <a href="/funcionarios/listar" class="btn btn-primary">Lista Funcion√°rios</a>
-                <a href="" class="btn btn-primary">Relat√≥rio Estoque</a>
-                <a href="" class="btn btn-primary">Relat√≥rio total de vendas</a>
+                <a href="/aplicacaoMVC/funcionarios/listar" class="btn btn-primary">Lista Funcion·rios</a>
+                <a href="" class="btn btn-primary">RelatÛrio Estoque</a>
+                <a href="" class="btn btn-primary">RelatÛrio total de vendas</a>
             </div>
         </div>
     </body>
