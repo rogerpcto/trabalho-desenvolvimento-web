@@ -79,7 +79,7 @@
                             <input type="hidden" name="id_fornecedor" value="<%= fornecedor.getId() %>"/>
                             <button type="submit" class="btn btn-primary btn-sm">Alterar</button>
                         </form>
-                        <form action="excluirfornecedor" method="post" style="display:inline;">
+                        <form action="excluirFornecedor" method="post" style="display:inline;">
                             <input type="hidden" name="id_fornecedor" value="<%= fornecedor.getId() %>"/>
                             <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
                         </form>
