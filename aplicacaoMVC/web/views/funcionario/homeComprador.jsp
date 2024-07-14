@@ -60,8 +60,8 @@
                             <input type="hidden" name="id" value="<%= produto.getId() %>"/>
                             <button type="submit" class="btn btn-danger btn-sm"><%= produto.getLiberadoVenda().equals("S") ? "Bloquear" : "Liberar" %></button>
                         </form>
-                        <form action="alterarProduto.jsp" method="get" style="display:inline;">
-                            <input type="hidden" name="id" value="<%= produto.getId() %>"/>
+                        <form action="alterarProduto" method="get" style="display:inline;">
+                            <input type="hidden" name="id_produto" value="<%= produto.getId() %>"/>
                             <button type="submit" class="btn btn-primary btn-sm">Alterar</button>
                         </form>
                         <form action="excluirProduto" method="post" style="display:inline;">
