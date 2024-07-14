@@ -56,6 +56,7 @@ public class FuncionarioDAO{
                     int intPapel = Integer.parseInt(resultado.getString("Papel"));
                     funcionario.setPapel(Papel.values()[intPapel]);
                     funcionario.setSenha(resultado.getString("SENHA"));
+                    funcionario.setEmail(resultado.getString("EMAIL"));
                 }
             }
             return funcionario;

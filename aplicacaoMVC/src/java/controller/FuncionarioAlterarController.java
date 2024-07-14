@@ -44,7 +44,8 @@ public class FuncionarioAlterarController extends HttpServlet {
         String email = request.getParameter("email");
         int numero_papel = Integer.parseInt(request.getParameter("papel"));
         try {
-            Funcionario funcionario = new Funcionario(id, nome, cpf, papel, senha, email);
+            Funcionario funcionario = new Funcionario(nome, cpf, numero_papel, senha, email);
+            funcionario.setId(id);
             FuncionarioDAO funcionariodao = new FuncionarioDAO();
             funcionariodao.Alterar(funcionario);
         }catch (Exception e) {}
