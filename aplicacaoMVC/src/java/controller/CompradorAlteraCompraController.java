@@ -22,11 +22,11 @@ public class CompradorAlterarCompraController extends HttpServlet {
             throws ServletException, IOException {
 
         RequestDispatcher rd;
-        int id_fornecedor = Integer.parseInt(request.getParameter("id_fornecedor"));
+        int id_compra = Integer.parseInt(request.getParameter("id_compra"));
         try {
-            FornecedorDAO fornecedorDAO = new FornecedorDAO();
-            Fornecedor fornecedor = fornecedorDAO.getFornecedor(id_fornecedor);
-            request.setAttribute("fornecedor", fornecedor);
+            CompraDAO compraDAO = new CompraDAO();
+            Compra compra = compraDAO.getCompra(id_compra);
+            request.setAttribute("compra", compra);
         }catch (Exception e) {}
         rd = request.getRequestDispatcher("/views/fornecedor/alterarCompra.jsp");
         rd.forward(request, response);

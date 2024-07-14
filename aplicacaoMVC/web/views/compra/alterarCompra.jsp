@@ -51,7 +51,7 @@
                                 ProdutoDAO produtoDAO = new ProdutoDAO();
                                 List<Produto> produtos = produtoDAO.ListaDeProdutos();    
                                 compra compra = (Compra) request.getAttribute("compra");
-                                    for (Produto produto : produtos) {
+                                for (Produto produto : produtos) {
                         %>
                         <option value="<%= produto.getId() %>" data-preco="<%= produto.getPrecoCompra() %>">
                             <%= compra.getProduto().getNomeProduto %>
