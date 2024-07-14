@@ -53,14 +53,6 @@
                             <input type="hidden" name="id" value="<%= produto.getId() %>" />
                             <button type="submit" class="btn btn-success btn-sm">Vender</button>
                         </form>
-                        <form action="alterarProduto.jsp" method="get" style="display:inline;">
-                            <input type="hidden" name="id" value="<%= produto.getId() %>"/>
-                            <button type="submit" class="btn btn-primary btn-sm">Alterar</button>
-                        </form>
-                        <form action="excluirProduto.jsp" method="post" style="display:inline;">
-                            <input type="hidden" name="id" value="<%= produto.getId() %>"/>
-                            <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
-                        </form>
                     </td>
                 </tr>
                 <%

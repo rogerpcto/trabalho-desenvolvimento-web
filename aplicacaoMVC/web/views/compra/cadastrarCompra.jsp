@@ -137,12 +137,20 @@
         </div>
     </div>
     <script>
-        // Script para atualizar o valor do preço de compra quando o produto é selecionado
-        document.getElementById('Produto').addEventListener('change', function() {
-            const selectedOption = this.options[this.selectedIndex];
+        function ProdutoChange() {
+            const produto = document.getElementById('Produto');
+            const selectedOption = produto.options[produto.selectedIndex];
             const precoCompra = selectedOption.getAttribute('data-preco');
             document.getElementById('preco_compra').value = precoCompra;
             calcularValorcompra();
+}
+
+        document.getElementById('Produto').addEventListener('change', ProdutoChange);
+        document.addEventListener('DOMContentLoaded', function() {
+            // Chama ProdutoChange apenas se houver uma opção selecionada
+            if (document.getElementById('Produto').selectedIndex !== -1) {
+                ProdutoChange.call(document.getElementById('Produto'));
+            }
         });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

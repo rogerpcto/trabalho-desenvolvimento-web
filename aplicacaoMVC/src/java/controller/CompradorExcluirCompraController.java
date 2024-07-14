@@ -34,14 +34,14 @@ public class CompradorExcluirCompraController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        int id_fornecedor = Integer.parseInt(request.getParameter("id"));
+        int id = Integer.parseInt(request.getParameter("id_compra"));
         try {
             CompraDAO compraDAO = new CompraDAO();
             Compra compra = compraDAO.getCompra(id);
-            compraDAO.Excluir(fornecedor);
+            compraDAO.Excluir(compra);
          
         }catch (Exception e) {}
-        response.sendRedirect("/aplicacaoMVC/comprador/listarCompra");
+        response.sendRedirect("/aplicacaoMVC/comprador/listarCompras");
     }
 }
 

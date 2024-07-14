@@ -59,7 +59,13 @@
                 <%
                     CompraDAO compraDAO = new CompraDAO();
                     List<Compra> compras = compraDAO.ListaDeCompras();
+                    Funcionario funcionario = null;
+                    if (session != null) {
+                        funcionario = (Funcionario) session.getAttribute("funcionario");
+                    }
                     for (Compra compra : compras) {
+                        if (compra.getComprador().getId() != funcionario.getId())
+                            continue;
                 %>
                 <tr>
                     <td><%= compra.getId() %></td>
@@ -71,13 +77,13 @@
                     <td><%= compra.getComprador().getNome()%></td>
                     <td>
                         <form action="liberar" method="post" style="display:inline;">
-                            <input type="hidden" name="id" value="<%= compra.getId() %>"/>
+                            <input type="hidden" name="id_compra" value="<%= compra.getId() %>"/>
                         </form>
-                        <form action="alterarcompra" method="get" style="display:inline;">
+                        <form action="alterarCompra" method="get" style="display:inline;">
                             <input type="hidden" name="id_compra" value="<%= compra.getId() %>"/>
                             <button type="submit" class="btn btn-primary btn-sm">Alterar</button>
                         </form>
-                        <form action="excluircompra" method="post" style="display:inline;">
+                        <form action="excluirCompra" method="post" style="display:inline;">
                             <input type="hidden" name="id_compra" value="<%= compra.getId() %>"/>
                             <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
                         </form>

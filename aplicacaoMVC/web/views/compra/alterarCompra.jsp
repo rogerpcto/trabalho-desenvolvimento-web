@@ -1,3 +1,4 @@
+<%@page import="entidade.Compra"%>
 <%@page import="entidade.Funcionario"%>
 <%@page import="model.FuncionarioDAO"%>
 <%@page import="entidade.Fornecedor"%>
@@ -43,25 +44,19 @@
     <div class="container">
         <jsp:include page="../comum/menu.jsp" />
         <div class="col-sm-6 mt-5 mb-5">
-            <form action="cadastrarCompra" method="post">
+            <form action="alterarCompra" method="post">
                 <div class="mb-3">
-                    <label for="Produto" class="form-label">Produto</label>
-                    <select class="form-select" name="id_produto" id="Produto" required aria-describedby="helpId">
-                        <% 
-                                ProdutoDAO produtoDAO = new ProdutoDAO();
-                                List<Produto> produtos = produtoDAO.ListaDeProdutos();    
-                                compra compra = (Compra) request.getAttribute("compra");
-                                for (Produto produto : produtos) {
+                    <div class="mb-3">
+                    <label for="Funcionario" class="form-label">Produto</label>
+                     <% 
+                                Compra compra = (Compra) request.getAttribute("compra");
                         %>
-                        <option value="<%= produto.getId() %>" data-preco="<%= produto.getPrecoCompra() %>">
-                            <%= compra.getProduto().getNomeProduto %>
-                        </option>
-                        <% 
-                            }
-                        %>
-                    </select>
-                    <input type="hidden" id="preco_compra" name="preco_compra" value="">
+                    <input type="text" class="form-control" id="nome_produto" name="nome_produto" value="<%= compra.getProduto().getNomeProduto()%>" disabled>
                     <small id="helpId" class="form-text text-muted">Produto</small>
+                </div>
+                    <input type="hidden" id="id_produto" name="id_produto" value="<%= compra.getProduto().getId()%>">
+                    <input type="hidden" id="preco_compra" name="preco_compra" value="<%= compra.getProduto().getPrecoCompra() %>">
+                    <input type="hidden" id="id_compra" name="id_compra" value="<%=compra.getId()%>">
                 </div>
                 <div class="mb-3">
                     <label for="quantidade_compra" class="form-label">Quantidade</label>
@@ -73,6 +68,7 @@
                            id="quantidade_compra"
                            aria-describedby="helpId"
                            oninput="calcularValorcompra()"
+                           value="<%= compra.getQuantidade()%>"
                     />
                     <small id="helpId" class="form-text text-muted"></small>
                 </div>
@@ -85,6 +81,7 @@
                            name="valor_compra"
                            id="valor_compra"
                            aria-describedby="helpId"
+                           value="<%= compra.getValor()%>"
                            readonly
                     />
                     <small id="helpId" class="form-text text-muted">Valor da compra</small>
@@ -112,7 +109,7 @@
                                 for (Fornecedor fornecedor : fornecedores) {
                         %>
                         <option value="<%= fornecedor.getId() %>">
-                            <%= compra.getFornecedor().getRazaoSocial %>
+                            <%= compra.getFornecedor().getRazaoSocial() %>
                         </option>
                         <% 
                                 }
@@ -134,19 +131,10 @@
                     <input type="text" class="form-control" id="funcionario" name="funcionario" value="<%= funcionario.getNome() %>" disabled>
                     <small id="helpId" class="form-text text-muted">Funcionário</small>
                 </div>
-                <button type="submit" class="btn btn-primary">Comprar</button>
+                <button type="submit" class="btn btn-primary">Alterar</button>
             </form>
         </div>
     </div>
-    <script>
-        // Script para atualizar o valor do preço de compra quando o produto é selecionado
-        document.getElementById('Produto').addEventListener('change', function() {
-            const selectedOption = this.options[this.selectedIndex];
-            const precoCompra = selectedOption.getAttribute('data-preco');
-            document.getElementById('preco_compra').value = precoCompra;
-            calcularValorcompra();
-        });
-    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>
