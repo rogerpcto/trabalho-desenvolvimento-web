@@ -1,4 +1,5 @@
-²/*
+
+/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -16,14 +17,14 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Logan
  */
-    @WebServlet(name = "CompradorListarProdutoController", urlPatterns = {"/vendedor/listarClientes"})
-public class VendedorListarProdutoController extends HttpServlet {
+    @WebServlet(name = "VendedorListarClientes", urlPatterns = {"/vendedor/listarClientes"})
+public class VendedorListarClientes extends HttpServlet {
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         RequestDispatcher rd;
-        rd = request.getRequestDispatcher("/views/produto/VendedorListarClientes.jsp");
+        rd = request.getRequestDispatcher("/views/cliente/listarClientes.jsp");
         rd.forward(request, response);
 
     }

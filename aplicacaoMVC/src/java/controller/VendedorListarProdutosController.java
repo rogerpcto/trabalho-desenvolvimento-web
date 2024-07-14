@@ -16,14 +16,14 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Logan
  */
-    @WebServlet(name = "CompradorListarProdutoController", urlPatterns = {"/vendedor/listarProdutos"})
-public class VendedorListarProdutoController extends HttpServlet {
+    @WebServlet(name = "VendedorListarProdutosController", urlPatterns = {"/vendedor/listarProdutos"})
+public class VendedorListarProdutosController extends HttpServlet {
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         RequestDispatcher rd;
-        rd = request.getRequestDispatcher("/views/produto/VendedorListarProdutos.jsp");
+        rd = request.getRequestDispatcher("/views/produto/VendedorListarProduto.jsp");
         rd.forward(request, response);
 
     }

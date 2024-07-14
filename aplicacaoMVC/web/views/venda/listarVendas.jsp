@@ -17,7 +17,7 @@
         <jsp:include page="../comum/menu.jsp" />
     </div>
     <div class="container">
-        <h1 class="mt-5">Lista de Produtos</h1>
+        <h1 class="mt-5">Lista de Vendas</h1>
         <table class="table table-bordered mt-3">
             <thead>
                 <tr>
@@ -32,7 +32,7 @@
             <tbody>
                 <%
                     VendaDAO vendaDAO = new VendaDAO();
-                    List<Venda> vendas = VendaDAO.ListaDeVendas();
+                    List<Venda> vendas = vendaDAO.ListaDeVendas();
                     for (Venda venda : vendas) {
                 %>
                 <tr>
@@ -40,11 +40,11 @@
                     <td><%= venda.getData() %></td>
                     <td><%= venda.getValor() %></td>
                     <td><%= venda.getCliente().getNome() %></td>
-                    <td><%= venda.getProduto().getNome() %></td>
+                    <td><%= venda.getProduto().getNomeProduto()%></td>
                     <td><%= venda.getVendedor().getNome() %></td>
                     <td>
-                        <a href="alterarCliente?id=<%= cliente.getId() %>" class="btn btn-primary btn-sm">Alterar</a>
-                        <a href="excluirCliente?id=<%= cliente.getId() %>" class="btn btn-danger btn-sm">Excluir</a>
+                        <a href="alterarVenda?id=<%= venda.getId() %>" class="btn btn-primary btn-sm">Alterar</a>
+                        <a href="excluirVenda?id=<%= venda.getId() %>" class="btn btn-danger btn-sm">Excluir</a>
                     </td>
                 </tr>
                 <%
