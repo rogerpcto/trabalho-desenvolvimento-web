@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="#">
-        <title>√Årea Restrita</title>
+        <title>¡rea Restrita</title>
         <link href="http://localhost:8080/aplicacaoMVC/views/bootstrap/bootstrap.min.css"  rel="stylesheet">
     </head>
     <body>
@@ -24,8 +24,8 @@
         <div class="container">
             <div class="mt-3">
                 <a href="/aplicacaoMVC/funcionarios/listar" class="btn btn-primary">Lista Funcion·rios</a>
-                <a href="" class="btn btn-primary">RelatÛrio Estoque</a>
-                <a href="" class="btn btn-primary">RelatÛrio total de vendas</a>
+                <a href="/aplicacaoMVC/administrador/relatorioEstoque" class="btn btn-primary">RelatÛrio Estoque</a>
+                <a href="/aplicacaoMVC/administrador/relatorioTotalVendas" class="btn btn-primary">RelatÛrio total de vendas</a>
             </div>
         </div>
     </body>

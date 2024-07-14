@@ -14,8 +14,8 @@ import java.sql.Date;
  *
  * @author hp
  */
-@WebServlet(name = "AdmRelatorioEstoqueController", urlPatterns = {"/administrador/relatorioEstoque"})
-public class AdmRelatorioEstoqueController extends HttpServlet {
+@WebServlet(name = "AdmRelatorioTotalVendasController", urlPatterns = {"/administrador/relatorioTotalVendas"})
+public class AdmRelatorioTotalVendasController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

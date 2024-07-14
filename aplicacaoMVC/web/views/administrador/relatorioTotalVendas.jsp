@@ -1,3 +1,4 @@
+<%@page import="model.VendaDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" import="entidade.Funcionario" %>
 <%@page import="model.VendasDAO"%>
 <%@page import="entidade.Produto"%>

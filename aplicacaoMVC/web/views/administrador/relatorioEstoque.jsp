@@ -34,10 +34,10 @@
                 <%
                     ProdutoDAO produtoDAO = new ProdutoDAO();
                     List<Produto> produtos = produtoDAO.ListaDeProdutos();
-                    Collections.sort(pessoas, new Comparator<Produto>() {
+                    Collections.sort(produtos, new Comparator<Produto>() {
                         @Override
                         public int compare(Produto p1, Produto p2) {
-                            return Integer.compare(p1.getQuantidadeDisponivel(), p2.getQuantidadeDisponivel());
+                            return Integer.compare(p2.getQuantidadeDisponivel(), p1.getQuantidadeDisponivel());
                         }
                     });
                     for (Produto produto : produtos) {

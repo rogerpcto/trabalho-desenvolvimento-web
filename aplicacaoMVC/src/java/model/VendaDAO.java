@@ -388,10 +388,10 @@ public class VendaDAO{
         ArrayList<Produto> produtos = new ArrayList();
         Conexao conexao = new Conexao();
         try {
-            String selectSQL = "SELECT produtos.nome_produto, SUM(vendas.quantidade_venda) AS total_vendido" +
-                                "FROM vendas"
+            String selectSQL = "SELECT produtos.nome_produto, SUM(vendas.quantidade_venda) AS total_vendido\n" +
+                                "FROM vendas\n"+
                                 "JOIN \n" +
-                                "    produtos ON vendas.id_produto = produtos.id\n" +
+                                "produtos ON vendas.id_produto = produtos.id\n" +
                                 "WHERE DATE(vendas.data_venda) = ? " +
                                 "GROUP BY produtos.id";
 
