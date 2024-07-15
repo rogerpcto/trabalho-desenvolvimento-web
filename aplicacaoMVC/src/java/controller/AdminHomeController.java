@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author hp
  */
-@WebServlet(name = "AdmHomeController", urlPatterns = {"/administrador/home"})
-public class AdmHomeController extends HttpServlet {
+@WebServlet(name = "AdminHomeController", urlPatterns = {"/administrador/home"})
+public class AdminHomeController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
