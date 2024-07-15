@@ -42,7 +42,6 @@ public class ClienteController extends HttpServlet {
             ClienteDAO clienteDAO = new ClienteDAO();
             clienteDAO.Inserir(cliente);
         }catch (Exception e) {}
-        rd = request.getRequestDispatcher("/views/cliente/cadastrarCliente.jsp");
-        rd.forward(request, response);
+        response.sendRedirect("/aplicacaoMVC/vendedor/listarClientes");
     }      
 }

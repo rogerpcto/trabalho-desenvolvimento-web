@@ -48,7 +48,7 @@ public class ProdutosExcluirController extends HttpServlet {
                 request.getRequestDispatcher("views/funcionario/homeComprador.jsp").forward(request, response);
             }
         }catch (Exception e) {}
-        response.sendRedirect("home");
+        response.sendRedirect("/aplicacaoMVC/comprador/listarProdutos");
     }
 }
 

@@ -88,7 +88,7 @@
                 <div class="mb-3">
                     <label for="cep" class="form-label">CEP</label>
                     <input required
-                        maxlength="9" minlength="3"
+                        maxlength="8" minlength="3"
                         type="text"
                         class="form-control"
                         name="cep"
@@ -125,7 +125,7 @@
                         type="submit"
                         class="btn btn-primary"
                     >
-                    Entrar
+                    Cadastrar
                     </button>
             </form>
         </div>

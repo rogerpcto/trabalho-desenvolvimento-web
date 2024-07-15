@@ -69,6 +69,6 @@ public class VendaController extends HttpServlet {
             produto.atualizaQuantidade(-quantidade_venda);
             produtoDAO.Alterar(produto);
         }catch (Exception e) {}
-         response.sendRedirect("home");
+         response.sendRedirect("/aplicacaoMVC/vendedor/listarProdutos");
     }
 }
