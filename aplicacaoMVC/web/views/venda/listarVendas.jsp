@@ -33,7 +33,14 @@
                 <%
                     VendaDAO vendaDAO = new VendaDAO();
                     List<Venda> vendas = vendaDAO.ListaDeVendas();
+                    Funcionario funcionario = null;
+                    
+                        if (session != null) {
+                            funcionario = (Funcionario) session.getAttribute("funcionario");
+                        }
                     for (Venda venda : vendas) {
+                        if(venda.getVendedor().getId() != funcionario.getId())
+                            continue;
                 %>
                 <tr>
                     <td><%= venda.getQuantidade() %></td>
@@ -44,7 +51,10 @@
                     <td><%= venda.getVendedor().getNome() %></td>
                     <td>
                         <a href="alterarVenda?id=<%= venda.getId() %>" class="btn btn-primary btn-sm">Alterar</a>
-                        <a href="excluirVenda?id=<%= venda.getId() %>" class="btn btn-danger btn-sm">Excluir</a>
+                        <form action="excluirVenda" method="post" style="display:inline;">
+                            <input type="hidden" name="id" value="<%= venda.getId() %>"/>
+                            <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+                        </form>
                     </td>
                 </tr>
                 <%

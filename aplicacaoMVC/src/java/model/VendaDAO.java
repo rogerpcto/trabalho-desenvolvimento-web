@@ -56,24 +56,40 @@ public class VendaDAO{
         Conexao conexao = new Conexao();
         try {
             PreparedStatement sql = conexao.getConexao().prepareStatement(
-                    "SELECT *, funcionarios.nome as nome_funcionario, funcionarios.email as email_funcionario\n" +
-                    "FROM vendas \n" +
-                    "JOIN clientes ON vendas.id_cliente = clientes.id\n" +
-                    "JOIN produtos ON vendas.id_produto = produtos.id\n" +
-                    "JOIN funcionarios ON vendas.id_funcionario = funcionarios.id \n" +
-                    "WHERE vendas.ID = ?;");
+                    "SELECT \n" +
+                                "vendas.id as vendas_id, vendas.quantidade_venda, vendas.data_venda, vendas.valor_venda, \n" +
+                                "vendas.id_cliente, vendas.id_produto, vendas.id_funcionario,\n" +
+                                "clientes.id as clientes_id, clientes.nome as nome_cliente, clientes.cpf, clientes.endereco, clientes.bairro, \n" +
+                                "clientes.cidade, clientes.uf, clientes.cep, clientes.telefone, clientes.email,\n" +
+                                "produtos.id as produtos_id, produtos.nome_produto, produtos.descricao, produtos.preco_compra, \n" +
+                                "produtos.preco_venda, produtos.quantidade_disponível, produtos.liberado_venda, produtos.id_categoria,\n" +
+                                "funcionarios.id as funcionarios_id, funcionarios.nome as nome_funcionario, funcionarios.cpf as cpf_funcionario, \n" +
+                                "funcionarios.senha, funcionarios.papel, funcionarios.email as funcionario_email,\n" +
+                                "categorias.id as categorias_id, categorias.nome_categoria\n" +
+                                "FROM \n" +
+                                "    vendas\n" +
+                                "JOIN \n" +
+                                "    clientes ON vendas.id_cliente = clientes.id\n" +
+                                "JOIN \n" +
+                                "    produtos ON vendas.id_produto = produtos.id\n" +
+                                "JOIN \n" +
+                                "    funcionarios ON vendas.id_funcionario = funcionarios.id\n" +
+                                "JOIN \n" +
+                                "    categorias ON produtos.id_categoria = categorias.id\n" +
+                                "WHERE vendas.id = ?");
             sql.setInt(1, id);
             ResultSet resultado = sql.executeQuery();
             Venda venda = new Venda();
             if (resultado != null) {
                 while (resultado.next()) {
+                    venda.setId(resultado.getInt("vendas_id"));
                     venda.setQuantidade(resultado.getInt("QUANTIDADE_VENDA"));
                     venda.setData(resultado.getDate("DATA_VENDA"));
                     venda.setValor(resultado.getInt("VALOR_VENDA"));
 
                     Cliente cliente = new Cliente();
                     cliente.setId(resultado.getInt("ID_CLIENTE"));
-                    cliente.setNome(resultado.getString("NOME"));
+                    cliente.setNome(resultado.getString("NOME_CLIENTE"));
                     cliente.setCpf(resultado.getString("CPF"));
                     cliente.setEndereco(resultado.getString("ENDERECO"));
                     cliente.setBairro ( resultado.getString("BAIRRO"));
@@ -91,7 +107,7 @@ public class VendaDAO{
                     produto.setDescricao(resultado.getString("DESCRICAO"));
                     produto.setPrecoCompra(resultado.getFloat("PRECO_COMPRA"));
                     produto.setPrecoVenda(resultado.getFloat("PRECO_VENDA"));
-                    produto.setQuantidadeDisponivel(resultado.getInt("QUANTIDADE_DISPONIVEL"));
+                    produto.setQuantidadeDisponivel(resultado.getInt("QUANTIDADE_DISPONÍVEL"));
                     produto.setLiberadoVenda(resultado.getString("LIBERADO_VENDA"));
 
                     Categoria categoria = new Categoria();
@@ -108,7 +124,7 @@ public class VendaDAO{
                     int intPapel = Integer.parseInt(resultado.getString("Papel"));
                     vendedor.setPapel(Papel.values()[intPapel]);
                     vendedor.setSenha(resultado.getString("SENHA"));
-                    vendedor.setEmail(resultado.getString("EMAIL_FUNCIONARIO"));
+                    vendedor.setEmail(resultado.getString("FUNCIONARIO_EMAIL"));
                     
                     venda.setVendedor(vendedor);
                 }
@@ -140,11 +156,12 @@ public class VendaDAO{
                 while (resultado.next()) {
                     venda.setQuantidade(resultado.getInt("QUANTIDADE_VENDA"));
                     venda.setData(resultado.getDate("DATA_VENDA"));
-                    venda.setValor(resultado.getInt("VALOR_VENDA"));
+                    venda.setValor(resultado.getFloat("VALOR_VENDA"));
+                    venda.setId(resultado.getInt("VENDAS_ID"));
 
                     Cliente cliente = new Cliente();
                     cliente.setId(resultado.getInt("ID_CLIENTE"));
-                    cliente.setNome(resultado.getString("NOME"));
+                    cliente.setNome(resultado.getString("NOME_CLIENTE"));
                     cliente.setCpf(resultado.getString("CPF"));
                     cliente.setEndereco(resultado.getString("ENDERECO"));
                     cliente.setBairro ( resultado.getString("BAIRRO"));
@@ -162,7 +179,7 @@ public class VendaDAO{
                     produto.setDescricao(resultado.getString("DESCRICAO"));
                     produto.setPrecoCompra(resultado.getFloat("PRECO_COMPRA"));
                     produto.setPrecoVenda(resultado.getFloat("PRECO_VENDA"));
-                    produto.setQuantidadeDisponivel(resultado.getInt("QUANTIDADE_DISPONIVEL"));
+                    produto.setQuantidadeDisponivel(resultado.getInt("QUANTIDADE_DISPONÍVEL"));
                     produto.setLiberadoVenda(resultado.getString("LIBERADO_VENDA"));
 
                     Categoria categoria = new Categoria();
@@ -175,11 +192,11 @@ public class VendaDAO{
                     Funcionario vendedor = new Funcionario();
                     vendedor.setId(resultado.getInt("ID_FUNCIONARIO"));
                     vendedor.setNome(resultado.getString("NOME_FUNCIONARIO"));
-                    vendedor.setCpf(resultado.getString("CPF"));
+                    vendedor.setCpf(resultado.getString("CPF_FUNCIONARIO"));
                     int intPapel = Integer.parseInt(resultado.getString("Papel"));
                     vendedor.setPapel(Papel.values()[intPapel]);
                     vendedor.setSenha(resultado.getString("SENHA"));
-                    vendedor.setEmail(resultado.getString("EMAIL_FUNCIONARIO"));
+                    vendedor.setEmail(resultado.getString("FUNCIONARIO_EMAIL"));
                     
                     venda.setVendedor(vendedor);
                 }
@@ -339,7 +356,7 @@ public class VendaDAO{
     public void Alterar(Venda venda) throws Exception {
         Conexao conexao = new Conexao();
         try {
-            PreparedStatement sql = conexao.getConexao().prepareStatement("UPDATE vendas SET quantidade_venda = ?, data_venda = ?, valor_venda = ?, id_cliente = ?, id_produto = ?, id_funcionario WHERE ID = ? ");
+            PreparedStatement sql = conexao.getConexao().prepareStatement("UPDATE vendas SET quantidade_venda = ?, data_venda = ?, valor_venda = ?, id_cliente = ?, id_produto = ?, id_funcionario = ? WHERE ID = ? ");
             sql.setInt(1, venda.getQuantidade());
             sql.setDate(2, venda.getData());
             sql.setFloat(3, venda.getValor());
