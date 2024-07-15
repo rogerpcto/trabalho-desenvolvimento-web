@@ -28,6 +28,7 @@
         <div class="mt-3">
             <a href="listarFornecedor" class="btn btn-primary">Lista Fornecedor</a>
             <a href="listarProdutos" class="btn btn-primary">Lista Produto</a>
+            <a href="/aplicacaoMVC/listar/categorias" class="btn btn-primary">Lista Categorias</a>
             <a href="listarCompras" class="btn btn-primary">Lista Compra</a>
         </div>
     </div>

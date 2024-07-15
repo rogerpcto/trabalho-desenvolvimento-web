@@ -155,4 +155,42 @@ public class ProdutoDAO{
         }
         return meusProdutos;
     }
+
+    public Produto getPrimeiroProdutoCategoria(int id) {
+        Conexao conexao = new Conexao();
+        try {
+            PreparedStatement sql = conexao.getConexao().prepareStatement(
+                    "SELECT *, categorias.id as id_categoria \n" +
+                    "FROM produtos \n" +
+                    "JOIN categorias ON categorias.id = produtos.id_categoria \n" +
+                    "WHERE id_categoria = ?;");
+            sql.setInt(1, id);
+            ResultSet resultado = sql.executeQuery();
+            Produto produto = new Produto();
+            if (resultado != null) {
+                while (resultado.next()) {
+                    produto.setId(resultado.getInt("ID"));
+                    produto.setNomeProduto(resultado.getString("NOME_PRODUTO"));
+                    produto.setDescricao(resultado.getString("DESCRICAO"));
+                    produto.setPrecoCompra(resultado.getFloat("PRECO_COMPRA"));
+                    produto.setPrecoVenda(resultado.getFloat("PRECO_VENDA"));
+                    produto.setQuantidadeDisponivel(resultado.getInt("QUANTIDADE_DISPONÍVEL"));
+                    produto.setLiberadoVenda(resultado.getString("LIBERADO_VENDA"));
+
+                    Categoria categoria = new Categoria();
+                    categoria.setId(resultado.getInt("ID_CATEGORIA"));
+                    categoria.setNomeCategoria(resultado.getString("NOME_CATEGORIA"));
+                    
+                    produto.setCategoria(categoria);
+                }
+                
+            }
+            return produto;
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Query de select (Produto) incorreta");
+        } finally {
+            conexao.closeConexao();
+        }
+    }
 }

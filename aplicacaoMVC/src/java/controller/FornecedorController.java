@@ -44,6 +44,6 @@ public class FornecedorController extends HttpServlet {
             FornecedorDAO fornecedorDAO = new FornecedorDAO();
             fornecedorDAO.Inserir(fornecedor);
         }catch (Exception e) {}
-         response.sendRedirect("comprador/home");
+         response.sendRedirect("/aplicacaoMVC/comprador/listarFornecedor");
     }      
 }

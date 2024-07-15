@@ -5,8 +5,10 @@
  */
 package controller;
 
+import entidade.Categoria;
 import entidade.Compra;
 import entidade.Funcionario;
+import entidade.Produto;
 import entidade.Venda;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
@@ -16,15 +18,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.CategoriaDAO;
 import model.CompraDAO;
-import model.FuncionarioDAO;
+import model.ProdutoDAO;
 import model.VendaDAO;
 /**
  *
  * @author aluno
  */
-@WebServlet(name = "FuncionarioExcluirController", urlPatterns = {"/funcionario/excluir"})
-public class FuncionarioExcluirController extends HttpServlet {
+@WebServlet(name = "CategoriaExcluirController", urlPatterns = {"/categoria/excluir"})
+public class CategoriaExcluirController extends HttpServlet {
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -32,21 +35,19 @@ public class FuncionarioExcluirController extends HttpServlet {
 
         int id = Integer.parseInt(request.getParameter("id"));
         try {
-            FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-            Funcionario funcionario = funcionarioDAO.getFuncionario(id);
-            VendaDAO vendaDAO = new VendaDAO();
-            Venda venda = vendaDAO.getPrimeiraVendaFuncionario(id);
-            CompraDAO compraDAO = new CompraDAO();
-            Compra compra = compraDAO.getPrimeiraCompraFuncionario(id);
-            if (compra.getProduto() == null && venda.getProduto() == null){
-                funcionarioDAO.Excluir(funcionario);
+            CategoriaDAO categoriaDAO = new CategoriaDAO();
+            Categoria categoria = categoriaDAO.getCategoria(id);
+            ProdutoDAO produtoDAO = new ProdutoDAO();
+            Produto produto = produtoDAO.getPrimeiroProdutoCategoria(id);
+            if (produto.getCategoria() == null){
+                categoriaDAO.Excluir(categoria);
             }
             else{
-                request.setAttribute("mensagem", "Não foi possível excluir o Funcionário, pois existem vendas e/ou compras associadas a ele.");
+                request.setAttribute("mensagem", "Não foi possível excluir a Categoria, pois existem vendas e/ou compras associadas a ele.");
                 request.getRequestDispatcher("views/administrador/home.jsp").forward(request, response);
             }
         }catch (Exception e) {}
-        response.sendRedirect("/aplicacaoMVC/funcionarios/listar");
+        response.sendRedirect("/aplicacaoMVC/listar/categorias");
     }
 }
 

@@ -28,7 +28,6 @@ public class FuncionarioController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        RequestDispatcher rd;
         String nome = request.getParameter("nome");
         String cpf = request.getParameter("cpf");
         String senha = request.getParameter("senha");
@@ -40,7 +39,6 @@ public class FuncionarioController extends HttpServlet {
             FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
             funcionarioDAO.Inserir(funcionario);
         }catch (Exception e) {}
-        rd = request.getRequestDispatcher("/views/funcionario/cadastrarFuncionario.jsp");
-        rd.forward(request, response);
+        response.sendRedirect("/aplicacaoMVC/funcionarios/listar");
     }      
 }    

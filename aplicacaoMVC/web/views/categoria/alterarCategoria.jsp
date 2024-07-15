@@ -1,3 +1,4 @@
+<%@page import="entidade.Categoria"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -11,8 +12,12 @@
     <div class="container">
         <jsp:include page="../comum/menu.jsp" />
         <div class="col-sm-6 mt-5 mb-5">
-            <form action="cadastrarCategoria" method="post">
+            <form action="alterar" method="post">
                 <div class="mb-3">
+                    <% 
+                        Categoria categoria = (Categoria) request.getAttribute("categoria");
+                    %>
+                    <input type="hidden" name="id" value="<%= categoria.getId()%>">
                     <label for="nome_categoria" class="form-label">Categoria</label>
                     <input required
                         maxlength="50" minlength="3"
@@ -21,6 +26,7 @@
                         name="nome_categoria"
                         id="nome_categoria"
                         aria-describedby="helpId"
+                        value="<%=categoria.getNomeCategoria()%>"
                     />
                     <small id="helpId" class="form-text text-muted">Nome da categoria</small>
                 </div>
@@ -28,7 +34,7 @@
                         type="submit"
                         class="btn btn-primary"
                     >
-                    Cadastrar
+                    Alterar
                     </button>
             </form>
         </div>
