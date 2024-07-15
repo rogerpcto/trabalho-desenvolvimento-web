@@ -1,6 +1,5 @@
 <%@page import="model.VendaDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" import="entidade.Funcionario" %>
-<%@page import="model.VendasDAO"%>
 <%@page import="entidade.Produto"%>
 <%@page import="java.util.List"%>
 <%@page import="java.sql.Date"%>
@@ -22,6 +21,20 @@
         </div>
         <div class="container">
         <h1 class="mt-5">Total de Vendas</h1>
+        <%
+            Date data = (Date) request.getAttribute("data");
+        %>
+        <div class="mb-3">
+            <input
+                type="date"
+                id="data"
+                class="form-control"
+                <% if (data != null){%>
+                value="<%= data%>"
+                
+                <% } %>
+            >
+        </div>
         <table class="table table-bordered mt-3">
             <thead>
                 <tr>
@@ -31,7 +44,6 @@
             </thead>
             <tbody>
                 <%
-                    Date data = (Date) request.getAttribute("data");
                     VendaDAO vendaDAO = new VendaDAO();
                     List<Produto> produtos = vendaDAO.TotalVendas(data);
                     for (Produto produto : produtos) {
@@ -48,5 +60,19 @@
     </div>
 </body>
         <script src="http://localhost:8080/aplicacaoMVC/views/bootstrap/bootstrap.bundle.min.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const dateInput = document.getElementById('data');
+
+                dateInput.addEventListener('change', function() {
+                    const selectedDate = dateInput.value;
+                    if (selectedDate) {
+                        const baseURL = window.location.origin + window.location.pathname;
+                        const newURL = baseURL + '?data=' + encodeURIComponent(selectedDate);
+                        window.location.href = newURL;
+                    }
+                });
+            });
+        </script>
     </body>
 </html>

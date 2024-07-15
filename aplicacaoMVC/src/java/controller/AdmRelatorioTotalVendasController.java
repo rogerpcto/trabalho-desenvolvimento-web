@@ -21,7 +21,13 @@ public class AdmRelatorioTotalVendasController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        Date data = Date.valueOf(request.getParameter("data"));
+        String dataParam = request.getParameter("data");
+        Date data = null;
+
+        if (dataParam != null && !dataParam.trim().isEmpty()) {
+            data = Date.valueOf(dataParam);
+        }
+
         request.setAttribute("data", data);
         
         RequestDispatcher rd;

@@ -476,15 +476,31 @@ public class VendaDAO{
         ArrayList<Produto> produtos = new ArrayList();
         Conexao conexao = new Conexao();
         try {
-            String selectSQL = "SELECT produtos.nome_produto, SUM(vendas.quantidade_venda) AS total_vendido\n" +
+            String selectSQL;
+            if (data != null){
+                selectSQL = "SELECT produtos.nome_produto, SUM(vendas.quantidade_venda) AS total_vendido\n" +
+                                    "FROM vendas\n"+
+                                    "JOIN \n" +
+                                    "produtos ON vendas.id_produto = produtos.id\n" +
+                                    "WHERE DATE(vendas.data_venda) = ? " +
+                                    "GROUP BY produtos.nome_produto\n" +
+                                    "ORDER BY total_vendido DESC";
+            }
+            else{
+                selectSQL = "SELECT produtos.nome_produto, SUM(vendas.quantidade_venda) AS total_vendido\n" +
                                 "FROM vendas\n"+
                                 "JOIN \n" +
                                 "produtos ON vendas.id_produto = produtos.id\n" +
-                                "WHERE DATE(vendas.data_venda) = ? " +
-                                "GROUP BY produtos.id";
+                                "GROUP BY produtos.nome_produto\n" +
+                                "ORDER BY total_vendido DESC";
+            }
+
 
             PreparedStatement preparedStatement;
             preparedStatement = conexao.getConexao().prepareStatement(selectSQL);
+            if (data != null){
+                preparedStatement.setDate(1, data);
+            }
             ResultSet resultado = preparedStatement.executeQuery();
             if (resultado != null) {
                 while (resultado.next()) {
